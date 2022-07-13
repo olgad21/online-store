@@ -24,45 +24,51 @@ class Item {
     this.price = itemObj.price
 
   }
+
   draw() {
-
-    // const allItems: HTMLDivElement[] = [];
-
-    // items.forEach((itemObj: ItemInterface) => {
       const item = document.createElement('div');
       item.className = 'item';
-  
-      const itemName = document.createElement('h2');
-      itemName.className = 'item__name';
-      itemName.innerHTML = this.name;
-      item.prepend(itemName);
+      item.classList.add('col-4');
+
+      const itemBody = document.createElement('div');
+      itemBody.classList.add('card-body');
   
       const itemImage = document.createElement('img');
       itemImage.className = 'item__img';
       itemImage.src = this.img;
-      itemName.after(itemImage);
+      itemImage.classList.add('card-img-top');
 
-      if(this.description){
-        const itemDesc = document.createElement('p');
-        itemDesc.className = 'item__desc';
-        itemDesc.innerHTML = this.description;
-        itemImage.after(itemDesc);
-      }
+      item.prepend(itemImage);
+      itemImage.after(itemBody);
+
+      const itemName = document.createElement('h2');
+      itemName.className = 'item__name';
+      itemName.innerHTML = this.name;
+      itemName.classList.add('card-title');
+      itemBody.prepend(itemName);
   
       const itemColor = document.createElement('p');
       itemColor.className = 'item__color';
       itemColor.innerHTML = `Color: ${this.color}`;
+      itemColor.classList.add('card-text');
       itemName.after(itemColor);
   
       const itemDate = document.createElement('p');
       itemDate.className = 'item__date';
       itemDate.innerHTML = `Created: ${this.date}`;
+      item.classList.add('card-text');
       itemColor.after(itemDate);
   
       const itemPrice = document.createElement('p');
       itemPrice.className = 'item__price';
       itemPrice.innerHTML = `$${this.price}`;
+      itemDate.classList.add('card-text');
       itemDate.after(itemPrice);
+
+      const itemButton = document.createElement('div');
+      itemButton.classList.add('btn', 'btn-light');
+      itemButton.innerHTML = 'Add to cart';
+      itemPrice.after(itemButton);
 
       return item
 

@@ -7,25 +7,71 @@
   <title>Hola Ceramics | Online Store</title>
 </head>
 <body>
-  <div class="container">
+  <div class="wrapper">
     <div class="header">
       <div class="header__container">
         <h1 class="title">Hola Ceramics</h1>
-        <div class="shopping-cart"></div>
+        <div class="shopping-cart">
+          <!-- <img class="shopping-card__img" src="assets/263142.png"></img> -->
+          <p class="shopping-card__number">0</p>
+        </div>
       </div>
     </div>
     <main>
-      <section class="filters">
-
+      <section class="filters container-xxl">
+        <div class="row">
+          <div class="filters__checkboxes col-4">
+            <div class="filters__categories">
+              <div class="form-check">
+                <input class="form-check-input" name="categories" type="checkbox" value="" id="Bowls" checked>
+                <label class="form-check-label" for="Bowls">
+                  Bowls
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" name="categories" type="checkbox" value="" id="Plates" checked>
+                <label class="form-check-label" for="Plates">
+                  Plates
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" name="categories" type="checkbox" value="" id="Cups" checked>
+                <label class="form-check-label" for="Cups">
+                  Cups
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" name="categories" type="checkbox" value="" id="Vases" checked>
+                <label class="form-check-label" for="Vases">
+                  Vases
+                </label>
+              </div>
+            </div>
+            <div class="filters__colors"></div>
+            <div class="filters__featured"></div>
+            <div class="filters__size"></div>
+          </div>
+          <div class="filters__range col-4">
+            <label for="customRange2" class="form-label">Price, $</label>
+            <input type="range" class="form-range" min="0" max="10000" id="customRange2">
+            <label for="customRange2" class="form-label">Year</label>
+            <input type="range" class="form-range" min="1990" max="2022" id="customRange2">
+          </div>
+          <div class="filters__search col-4"></div>
+        </div>
       </section>
-      <section class="items">
-  
+      <section class="container-xxl">
+        <div class="row justify-content-between items-container">
+
+        </div>
       </section>
     </main>
-    <div class="footer">
-      <p class="year">2022</p>
-      <a class="logo" href="https://rs.school/js/" target="_blank"></a>
-      <a class="name" href="https://github.com/olgad21" target="_blank">Olga Dashuk</a>
+    <div class="footer container">
+      <div class="row">
+       <p class="year col">2022</p>
+       <a class="logo col" href="https://rs.school/js/" target="_blank"></a>
+       <a class="name col" href="https://github.com/olgad21" target="_blank">Olga Dashuk</a>
+      </div>
     </div>
   </div>
   

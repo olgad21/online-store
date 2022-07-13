@@ -28,7 +28,7 @@ const baseConfig = {
             {
               test: /\.(woof(2)?|eot|otf|ttf)$/i,
               type: 'asset/resource',
-          },
+            },
         ],
     },
     resolve: {
@@ -37,7 +37,7 @@ const baseConfig = {
     output: {
         filename: 'index.js',
         path: path.resolve(__dirname, './dist'),
-        assetModuleFilename: './assets/[name][ext]',
+        assetModuleFilename: 'assets/[name][ext]',
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -46,11 +46,11 @@ const baseConfig = {
         }),
         new CleanWebpackPlugin(),
         new ESlintPlugin({ extensions: ['ts'] }),
-        // new CopyPlugin({
-        //   patterns: [
-        //     { from: './public }
-        //   ]
-        // })
+        new CopyPlugin({
+          patterns: [
+            { from: './src/assets/', to: './assets' }
+          ]
+        })
     ],
 };
 
