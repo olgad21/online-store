@@ -1,8 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-debugger */
 import Item from '../components/item';
 import { ItemInterface } from '../components/itemsData';
-import { Size } from '../components/itemsData';
 
 type Filter = {
   type: string,
@@ -11,10 +8,12 @@ type Filter = {
 
 export class StoreItems {
 
-  elements: {filters: Filter[], resultData: ItemInterface[], itemsContainer: HTMLDivElement} = {
+  elements: {filters: Filter[], resultData: ItemInterface[], itemsContainer: HTMLDivElement, searchRequest: string, searchData: ItemInterface[]} = {
     filters: [],
     resultData: [],
-    itemsContainer: document.getElementsByClassName('items-container')[0] as HTMLDivElement
+    itemsContainer: document.getElementsByClassName('items-container')[0] as HTMLDivElement,
+    searchRequest: '',
+    searchData: [],
   }
 
   initialize(data: ItemInterface[]) {
@@ -59,6 +58,10 @@ export class StoreItems {
 
     let res: ItemInterface[] = [...data];
 
+    if (this.elements.searchData.length !== 0){
+      res = this.elements.searchData;
+    }
+
     res = res.filter(el => {
       return categories.includes(el.category);
     });
@@ -87,8 +90,4 @@ export class StoreItems {
     errorMessage.innerHTML = 'Sorry, no results found';
     this.elements.itemsContainer?.append(errorMessage);
   }
-
-  // applySearchResult(){
-
-  // }
 }

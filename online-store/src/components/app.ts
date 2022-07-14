@@ -42,7 +42,10 @@ export class App {
     filtersText.focus();
     filtersText.addEventListener('change', () => {
       filteredResults.remove();
-      const searchRequest = filtersText.value;
+
+      const searchRequest = filtersText.value.toLowerCase();
+      filteredResults.elements.searchRequest = searchRequest;
+
       const searchData: ItemInterface[] = [];
 
       filteredResults.elements.resultData.forEach(dataObj => {
@@ -51,16 +54,18 @@ export class App {
         }
       });
 
+      filteredResults.elements.searchData = searchData;
+
       if(searchData.length === 0){
         filteredResults.showError();
       }
 
-      // filteredResults.applyFilters(searchData);
       filteredResults.initialize(searchData);
     });
 
     resetBtn?.addEventListener('click', () => {
-      filtersText.value = '';
+      filteredResults.elements.searchRequest = filtersText.value = '';
+      filteredResults.elements.searchData = [];
       filteredResults.applyFilters(data);
     })
   } 
