@@ -3,29 +3,66 @@ import { ItemInterface } from '../components/itemsData';
 
 export class App {
   start(data: ItemInterface[]) {
-    const filters = Array.from(document.querySelectorAll('input'));
-    const filtersByCategory = filters.filter(filter => filter.name === 'categories');
+    
+    const filtersCheckbox = Array.from(document.querySelectorAll('input[type=checkbox]')) as HTMLInputElement[];
     const filteredResults = new StoreItems(); 
 
-    filtersByCategory.forEach(filter => {
+    //Add Event listener to checkboxes
+    filtersCheckbox.forEach(filter => {
       filter.addEventListener('click', () => {
+        
         if (filter.checked) {
-          filteredResults.applyFilters(filter);
+          filteredResults.addToFilters(filter);
         } else {
-          filteredResults.elements.appliedFiltersByCategory =
-            filteredResults.elements.appliedFiltersByCategory.filter(el => filter.id !== el);
+          filteredResults.elements.filters =
+            filteredResults.elements.filters.filter(el => filter.id !== el.value);
         }
 
-        filteredResults.initialize(data);
+        console.log('clicked', filteredResults.elements.filters);
+
+        filteredResults.applyFilters(data);
       });
     });
 
-    filtersByCategory.forEach(filter => {
+    filtersCheckbox.forEach(filter => {
       if (filter.checked){
-        filteredResults.applyFilters(filter);
+        filteredResults.addToFilters(filter);
       }
     });
-    filteredResults.initialize(data);
+
+    filteredResults.elements.resultData = data;
+
+    filteredResults.initialize(filteredResults.elements.resultData);
+  
+
+    //Add Event listener to search bar
+    const filtersText = document.querySelector('input[type=text]') as HTMLInputElement;
+    const resetBtn = document.querySelector('.reset-btn');
+
+    filtersText.focus();
+    filtersText.addEventListener('change', () => {
+      filteredResults.remove();
+      const searchRequest = filtersText.value;
+      const searchData: ItemInterface[] = [];
+
+      filteredResults.elements.resultData.forEach(dataObj => {
+        if (dataObj.name.toLowerCase().includes(searchRequest.toLowerCase())){
+          searchData.push(dataObj);
+        }
+      });
+
+      if(searchData.length === 0){
+        filteredResults.showError();
+      }
+
+      // filteredResults.applyFilters(searchData);
+      filteredResults.initialize(searchData);
+    });
+
+    resetBtn?.addEventListener('click', () => {
+      filtersText.value = '';
+      filteredResults.applyFilters(data);
+    })
   } 
 
 }

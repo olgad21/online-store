@@ -11,6 +11,7 @@ class Item {
   img: string;
   date: number;
   price: number;
+  size: string;
 
   constructor(itemObj: ItemInterface){
     this.name = itemObj.name;
@@ -21,7 +22,8 @@ class Item {
     this.inCart = itemObj.inCart;
     this.img = itemObj.img;
     this.date = itemObj.date;
-    this.price = itemObj.price
+    this.price = itemObj.price;
+    this.size = itemObj.size;
 
   }
 
@@ -65,8 +67,14 @@ class Item {
       itemDate.classList.add('card-text');
       itemDate.after(itemPrice);
 
+      const itemSize = document.createElement('p');
+      itemPrice.className = 'item__size';
+      itemPrice.innerHTML = `Size: ${this.size}`;
+      itemDate.classList.add('card-text');
+      itemPrice.after(itemSize);
+
       const itemButton = document.createElement('div');
-      itemButton.classList.add('btn', 'btn-light');
+      itemButton.classList.add('btn', 'btn-dark');
       itemButton.innerHTML = 'Add to cart';
       itemPrice.after(itemButton);
 

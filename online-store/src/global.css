@@ -20,18 +20,54 @@ body {
   margin: 0 auto; 
 }
 
+/* header{
+  background-color: #D8CABA;
+} */
+
 .header__container{
   display: flex;
   justify-content: space-between;
+  margin: 15px 0;
 }
 
 .shopping-cart{
   position: relative;
 }
+
+.items-container {
+  height: 100%;
+}
+
+.error-text {
+  font-size: 400%;
+  text-align: center;
+}
 /* .header,
 .footer {
   background-color: grey;
 } */
+.filters__search input {
+  margin-bottom: 0.5rem;
+}
+
+.filters__search{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.filters__checkboxes{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.filters__checkboxes > div {
+  margin-bottom: 1rem;
+}
 
 .items {
   display: flex;
@@ -39,14 +75,18 @@ body {
   justify-content: space-between;
 }
 
-/* s */
+.footer{
+  display: flex;
+  justify-content: space-between;
+  margin: 15px 0;
+}
 
 .year,
 .name {
-    font-size: 14px;
-    color: #333;
-    text-decoration: none;
-    margin-top: 15px;
+  display: block;
+  font-size: 14px;
+  color: #333;
+  text-decoration: none;
 }
 
 .name:hover {

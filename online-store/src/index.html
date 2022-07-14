@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="wrapper">
-    <div class="header">
+    <header>
       <div class="header__container">
         <h1 class="title">Hola Ceramics</h1>
         <div class="shopping-cart">
@@ -16,64 +16,131 @@
           <p class="shopping-card__number">0</p>
         </div>
       </div>
-    </div>
-    <main>
-      <section class="filters container-xxl">
-        <div class="row">
-          <div class="filters__checkboxes col-4">
-            <div class="filters__categories">
-              <div class="form-check">
-                <input class="form-check-input" name="categories" type="checkbox" value="" id="Bowls" checked>
-                <label class="form-check-label" for="Bowls">
-                  Bowls
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" name="categories" type="checkbox" value="" id="Plates" checked>
-                <label class="form-check-label" for="Plates">
-                  Plates
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" name="categories" type="checkbox" value="" id="Cups" checked>
-                <label class="form-check-label" for="Cups">
-                  Cups
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" name="categories" type="checkbox" value="" id="Vases" checked>
-                <label class="form-check-label" for="Vases">
-                  Vases
-                </label>
-              </div>
-            </div>
-            <div class="filters__colors"></div>
-            <div class="filters__featured"></div>
-            <div class="filters__size"></div>
-          </div>
-          <div class="filters__range col-4">
-            <label for="customRange2" class="form-label">Price, $</label>
-            <input type="range" class="form-range" min="0" max="10000" id="customRange2">
-            <label for="customRange2" class="form-label">Year</label>
-            <input type="range" class="form-range" min="1990" max="2022" id="customRange2">
-          </div>
-          <div class="filters__search col-4"></div>
-        </div>
-      </section>
-      <section class="container-xxl">
-        <div class="row justify-content-between items-container">
-
-        </div>
-      </section>
-    </main>
-    <div class="footer container">
+    </header>
+    <main container-xxl>
       <div class="row">
-       <p class="year col">2022</p>
-       <a class="logo col" href="https://rs.school/js/" target="_blank"></a>
-       <a class="name col" href="https://github.com/olgad21" target="_blank">Olga Dashuk</a>
+        <section class="filters col-3">
+          <div class="filters__search">
+            <!-- <label for="search" class="form-label"></label> -->
+            <input type="text" class="form-range" placeholder="Enter text" id="search" name="textfield" autocomplete="off">
+            <button class="btn btn-dark search-btn">Search</button>
+            <button class="btn btn-light reset-btn">Reset</button>
+          </div>
+          <div class="filters__checkboxes">
+            <div class="filters__categories">
+                <p>Choose category</p>
+                <div class="form-check">
+                  <input class="form-check-input" name="category" type="checkbox" value="Bowls" id="Bowls" checked>
+                  <label class="form-check-label" for="Bowls">
+                    Bowls
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" name="category" type="checkbox" value="Plates" id="Plates" checked>
+                  <label class="form-check-label" for="Plates">
+                    Plates
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" name="category" type="checkbox" value="Cups" id="Cups" checked>
+                  <label class="form-check-label" for="Cups">
+                    Cups
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" name="category" type="checkbox" value="Vases" id="Vases" checked>
+                  <label class="form-check-label" for="Vases">
+                    Vases
+                  </label>
+                </div>
+            </div>
+            <div class="filters__colors">
+                <p>Choose color</p>
+                <div class="form-check">
+                  <input class="form-check-input" name="color" type="checkbox" value="Green" id="Green" checked>
+                  <label class="form-check-label" for="Green">
+                    Green
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" name="color" type="checkbox" value="Gold" id="Gold" checked>
+                  <label class="form-check-label" for="Gold">
+                    Gold
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" name="color" type="checkbox" value="Pink" id="Pink" checked>
+                  <label class="form-check-label" for="Pink">
+                    Pink
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" name="color" type="checkbox" value="Blue" id="Blue" checked>
+                  <label class="form-check-label" for="Vases">
+                    Blue
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" name="color" type="checkbox" value="Black" id="Black" checked>
+                  <label class="form-check-label" for="Black">
+                    Black
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" name="color" type="checkbox" value="Silver" id="Silver" checked>
+                  <label class="form-check-label" for="Silver">
+                    Silver
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" name="color" type="checkbox" value="White" id="White" checked>
+                  <label class="form-check-label" for="White">
+                    White
+                  </label>
+                </div>
+            </div>
+            <div class="filters__featured"></div>
+            <div class="filters__size">
+                <p>Choose size</p>
+                <div class="form-check">
+                  <input class="form-check-input" name="size" type="checkbox" value="Small" id="Small" checked>
+                  <label class="form-check-label" for="Small">
+                    Small
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" name="size" type="checkbox" value="Medium" id="Medium" checked>
+                  <label class="form-check-label" for="White">
+                    Medium
+                  </label>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" name="size" type="checkbox" value="Large" id="Large" checked>
+                  <label class="form-check-label" for="Large">
+                    Large
+                  </label>
+                </div>
+            </div>
+          </div>
+          <!-- <div class="filters__range">
+              <label for="customRange2" class="form-label">Price, $</label>
+              <input type="range" class="form-range" min="0" max="10000" id="customRange2">
+              <label for="customRange2" class="form-label">Year</label>
+              <input type="range" class="form-range" min="1990" max="2022" id="customRange2">
+          </div> -->
+        </section>
+        <section class="container-xxl col-9">
+          <div class="row justify-content-between items-container">
+          </div>
+        </section>
       </div>
+    </main>
+    <footer class="footer">
+      <p class="year">2022</p>
+      <a class="logo" href="https://rs.school/js/" target="_blank"></a>
+      <a class="name" href="https://github.com/olgad21" target="_blank">Olga Dashuk</a>
     </div>
-  </div>
+  </footer>
   
 </body>
 </html>

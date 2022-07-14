@@ -14,10 +14,10 @@ import asset13 from '../assets/tg_image_2336474914.jpeg';
 import asset14 from '../assets/tg_image_2424065743.jpeg';
 import asset15 from '../assets/tg_image_2554768769.jpeg';
 
-enum Size {
-  Small = 'small',
-  Medium = 'medium',
-  Large = 'large'
+export enum Size {
+  Small = 'Small',
+  Medium = 'Medium',
+  Large = 'Large'
 }
 
 
