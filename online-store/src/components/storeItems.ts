@@ -45,21 +45,30 @@ export class StoreItems {
     const categories: string[] = [];
     const sizes: string[] = [];
     const colors: string[] = [];
+    const featured: boolean[] = [];
 
     this.elements.filters.forEach(filter => {
       if (filter.type === 'category') {
         categories.push(filter.value)
       } else if (filter.type === 'color') {
         colors.push(filter.value)
+      } else if (filter.type ==='featured'){
+        featured.push(!!filter.value)
       } else {
         sizes.push(filter.value)
-      }
+      } 
     })
 
     let res: ItemInterface[] = [...data];
 
     if (this.elements.searchData.length !== 0){
       res = this.elements.searchData;
+    }
+
+    if (featured.length !== 0){
+      res = res.filter(el => {
+        return featured.includes(el.featured);
+      });
     }
 
     res = res.filter(el => {

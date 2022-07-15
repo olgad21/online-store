@@ -79,10 +79,20 @@ class Item {
       itemSize.classList.add('card-text');
       itemPrice.after(itemSize);
 
+      const itemFeatured = document.createElement('p');
+      itemFeatured.className = 'item__featured';
+      if (this.featured === true){
+        itemFeatured.innerHTML = 'Featured: yes';
+      } else {
+        itemFeatured.innerHTML = 'Featured: no';
+      }
+      itemFeatured.classList.add('card-text');
+      itemSize.after(itemFeatured);
+
       //const itemButton = document.createElement('div');
       this.elements.itemButton.classList.add('btn', 'btn-dark');
       this.elements.itemButton.innerHTML = 'Add to cart';
-      itemSize.after(this.elements.itemButton);
+      itemFeatured.after(this.elements.itemButton);
 
       
       this.elements.item.addEventListener('click', this.handleCart);

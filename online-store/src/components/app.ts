@@ -18,21 +18,21 @@ export class App {
             filteredResults.elements.filters.filter(el => filter.id !== el.value);
         }
 
-        console.log('clicked', filteredResults.elements.filters);
+        console.log(filteredResults.elements.filters);
 
         filteredResults.applyFilters(data);
       });
     });
 
-    filtersCheckbox.forEach(filter => {
+   filtersCheckbox.forEach(filter => {
       if (filter.checked){
         filteredResults.addToFilters(filter);
       }
-    });
-
-    filteredResults.elements.resultData = data;
-
-    filteredResults.initialize(filteredResults.elements.resultData);
+   });
+ 
+   filteredResults.elements.resultData = data;
+ 
+   filteredResults.initialize(filteredResults.elements.resultData);
   
 
     //Add Event listener to search bar
@@ -69,6 +69,4 @@ export class App {
       filteredResults.applyFilters(data);
     })
   } 
-
-  //Add items ro cart
 }
