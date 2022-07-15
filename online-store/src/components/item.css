@@ -2,6 +2,10 @@
   margin: 2rem 0;
 }
 
+.item--active{
+  opacity: 0.6;
+}
+
 .item__img {
   display: block;
   max-width: 300px;

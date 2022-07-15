@@ -70,4 +70,5 @@ export class App {
     })
   } 
 
+  //Add items ro cart
 }

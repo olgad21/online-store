@@ -1,4 +1,5 @@
 import { ItemInterface } from '../components/itemsData';
+import { Cart } from '../components/cart';
 import './item.css';
 
 class Item {
@@ -27,27 +28,32 @@ class Item {
 
   }
 
-  draw() {
-      const item = document.createElement('div');
-      item.className = 'item';
-      item.classList.add('col-4');
+  elements: {item: HTMLDivElement, itemButton: HTMLDivElement} = {
+    item: document.createElement('div'),
+    itemButton: document.createElement('div'),
+  }
 
-      const itemBody = document.createElement('div');
-      itemBody.classList.add('card-body');
+  draw() {
+      //const item = document.createElement('div');
+      this.elements.item.className = 'item';
+      this.elements.item.classList.add('col-4');
+
+      // const itemBody = document.createElement('div');
+      // itemBody.classList.add('card-body');
   
       const itemImage = document.createElement('img');
       itemImage.className = 'item__img';
       itemImage.src = this.img;
       itemImage.classList.add('card-img-top');
 
-      item.prepend(itemImage);
-      itemImage.after(itemBody);
+      this.elements.item.prepend(itemImage);
+      // itemImage.after(itemBody);
 
       const itemName = document.createElement('h2');
       itemName.className = 'item__name';
       itemName.innerHTML = this.name;
       itemName.classList.add('card-title');
-      itemBody.prepend(itemName);
+      itemImage.after(itemName);
   
       const itemColor = document.createElement('p');
       itemColor.className = 'item__color';
@@ -58,28 +64,73 @@ class Item {
       const itemDate = document.createElement('p');
       itemDate.className = 'item__date';
       itemDate.innerHTML = `Created: ${this.date}`;
-      item.classList.add('card-text');
+      itemDate.classList.add('card-text');
       itemColor.after(itemDate);
   
       const itemPrice = document.createElement('p');
       itemPrice.className = 'item__price';
       itemPrice.innerHTML = `$${this.price}`;
-      itemDate.classList.add('card-text');
+      itemPrice.classList.add('card-text');
       itemDate.after(itemPrice);
 
       const itemSize = document.createElement('p');
-      itemPrice.className = 'item__size';
-      itemPrice.innerHTML = `Size: ${this.size}`;
-      itemDate.classList.add('card-text');
+      itemSize.className = 'item__size';
+      itemSize.innerHTML = `Size: ${this.size}`;
+      itemSize.classList.add('card-text');
       itemPrice.after(itemSize);
 
-      const itemButton = document.createElement('div');
-      itemButton.classList.add('btn', 'btn-dark');
-      itemButton.innerHTML = 'Add to cart';
-      itemPrice.after(itemButton);
+      //const itemButton = document.createElement('div');
+      this.elements.itemButton.classList.add('btn', 'btn-dark');
+      this.elements.itemButton.innerHTML = 'Add to cart';
+      itemSize.after(this.elements.itemButton);
 
-      return item
+      
+      this.elements.item.addEventListener('click', this.handleCart);
 
+      return this.elements.item
+
+  }
+
+  handleCart(e:Event){
+    const cart = new Cart();
+
+    console.log('click');
+    const target = e.target as Element; //куда кликнули
+    console.log(cart.numberInCart);
+
+    // if item is in the cart
+    if (target.classList.contains('item--active') || (target.parentNode as HTMLDivElement)?.classList.contains('item--active')){
+      
+      target.classList.remove('item--active');
+      (target.parentNode as HTMLElement)?.classList.remove('item--active');
+      cart.decreaseNumber();
+      return
+    }
+
+    //if item is not in the cart
+
+    if (cart.numberInCart === 4){
+      console.log('limit');
+      cart.createPopup();
+      return
+    }
+
+    if (target.classList.contains('item')){
+      if (!target.classList.contains('item--active')){
+        target.classList.add('item--active');
+        cart.increaseNumber();
+        return
+      }
+    }
+
+    if (!target.classList.contains('item')){
+      if (!(target.parentNode as HTMLDivElement)?.classList.contains('item--active')){
+        (target.parentNode as HTMLDivElement)?.classList.add('item--active');
+        cart.increaseNumber();
+        return
+      }
+    }
+    console.log(cart.numberInCart);
   }
 }
 
