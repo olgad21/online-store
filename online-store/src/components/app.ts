@@ -41,32 +41,65 @@ export class App {
 
     filtersText.focus();
     filtersText.addEventListener('change', () => {
-      filteredResults.remove();
+      
+      filteredResults.elements.searchData = [];
+      filteredResults.applyFilters(data);
 
       const searchRequest = filtersText.value.toLowerCase();
       filteredResults.elements.searchRequest = searchRequest;
 
-      const searchData: ItemInterface[] = [];
-
       filteredResults.elements.resultData.forEach(dataObj => {
         if (dataObj.name.toLowerCase().includes(searchRequest.toLowerCase())){
-          searchData.push(dataObj);
+          filteredResults.elements.searchData.push(dataObj);
         }
       });
 
-      filteredResults.elements.searchData = searchData;
-
-      if(searchData.length === 0){
-        filteredResults.showError();
-      }
-
-      filteredResults.initialize(searchData);
+      filteredResults.applyFilters(data);
     });
 
-    resetBtn?.addEventListener('click', () => {
-      filteredResults.elements.searchRequest = filtersText.value = '';
+    resetBtn?.addEventListener('click', resetSearch);
+
+    function resetSearch(){
+      filtersText.value = '';
       filteredResults.elements.searchData = [];
       filteredResults.applyFilters(data);
-    })
+    }
+
+    //Add Range Filters
+    const priceSliders = Array.from(document.querySelectorAll<HTMLInputElement>('#priceRange'));
+    const yearSliders = Array.from(document.querySelectorAll<HTMLInputElement>('#yearRange'));
+
+    const sliderMinPrice = document.querySelector<HTMLElement>('.filters__price-min-value') as HTMLElement;
+    const sliderMaxPrice = document.querySelector<HTMLElement>('.filters__price-max-value') as HTMLElement;
+
+    const sliderMinYear = document.querySelector<HTMLElement>('.filters__year-min-value') as HTMLElement;
+    const sliderMaxYear = document.querySelector<HTMLElement>('.filters__year-max-value') as HTMLElement;
+
+    function handleSlider(sliders: HTMLInputElement[], minValue:HTMLElement, maxValue:HTMLElement, outputArr: number[]){
+      sliders[0].addEventListener('input', () => {
+        if(+sliders[0].value > +sliders[1].value){
+           sliders[1].value = sliders[0].value.toString();
+         }
+       });
+       
+       sliders[1].addEventListener('input', () => {
+        if(+sliders[1].value < +sliders[0].value){
+           sliders[0].value = sliders[1].value.toString();
+         }
+       });
+       
+       sliders.forEach((slider) => {
+         slider.addEventListener('change', () => {
+           minValue.innerHTML = `${sliders[0].value}`;
+           maxValue.innerHTML = `${sliders[1].value}`;
+           outputArr[0] = +sliders[0].value;
+           outputArr[1] = +sliders[1].value;
+           filteredResults.applyFilters(data);
+         })
+       });
+    }
+
+    handleSlider(priceSliders, sliderMinPrice, sliderMaxPrice, filteredResults.elements.priceRange);
+    handleSlider(yearSliders, sliderMinYear, sliderMaxYear, filteredResults.elements.dateRange);
   } 
 }

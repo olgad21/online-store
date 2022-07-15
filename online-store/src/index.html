@@ -129,12 +129,28 @@
                 </div>
             </div>
           </div>
-          <!-- <div class="filters__range">
-              <label for="customRange2" class="form-label">Price, $</label>
-              <input type="range" class="form-range" min="0" max="10000" id="customRange2">
-              <label for="customRange2" class="form-label">Year</label>
-              <input type="range" class="form-range" min="1990" max="2022" id="customRange2">
-          </div> -->
+          <div class="filters__price">
+            <label for="priceRange" class="form-label">Price, $</label>
+            <div class="filters__price-range">
+              <input type="range" class="form-range" min="0" max="1000" value="0" id="priceRange">
+              <input type="range" class="form-range" min="0" max="1000" value="1000" id="priceRange">
+            </div>
+            <div class="filters__price-value">
+              <p class="filters__price-min-value">0</p>
+              <p class="filters__price-max-value">1000</p>
+            </div> 
+          </div>
+          <div class="filters__year">
+            <label for="yearRange" class="form-label">Release year</label>
+            <div class="filters__year-range">
+              <input type="range" class="form-range" min="1990" max="2022" value="1990" id="yearRange">
+              <input type="range" class="form-range" min="1990" max="2022" value="2022" id="yearRange">
+            </div>
+            <div class="filters__year-value">
+              <p class="filters__year-min-value">1990</p>
+              <p class="filters__year-max-value">2022</p>
+            </div> 
+          </div>
         </section>
         <section class="container-xxl col-9">
           <div class="row justify-content-between items-container">

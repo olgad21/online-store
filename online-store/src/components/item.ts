@@ -98,7 +98,6 @@ class Item {
       this.elements.item.addEventListener('click', this.handleCart);
 
       return this.elements.item
-
   }
 
   handleCart(e:Event){
@@ -106,7 +105,7 @@ class Item {
 
     console.log('click');
     const target = e.target as Element; //куда кликнули
-    console.log(cart.numberInCart);
+    //TODO: Менять свойство incart у объекта item
 
     // if item is in the cart
     if (target.classList.contains('item--active') || (target.parentNode as HTMLDivElement)?.classList.contains('item--active')){
@@ -140,7 +139,6 @@ class Item {
         return
       }
     }
-    console.log(cart.numberInCart);
   }
 }
 

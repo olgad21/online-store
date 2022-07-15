@@ -8,12 +8,14 @@ type Filter = {
 
 export class StoreItems {
 
-  elements: {filters: Filter[], resultData: ItemInterface[], itemsContainer: HTMLDivElement, searchRequest: string, searchData: ItemInterface[]} = {
+  elements: {filters: Filter[], resultData: ItemInterface[], itemsContainer: HTMLDivElement, searchRequest: string, searchData: ItemInterface[], priceRange: number[], dateRange: number[]} = {
     filters: [],
     resultData: [],
     itemsContainer: document.getElementsByClassName('items-container')[0] as HTMLDivElement,
     searchRequest: '',
     searchData: [],
+    priceRange: [0, 1000],
+    dateRange: [1990, 2022],
   }
 
   initialize(data: ItemInterface[]) {
@@ -70,6 +72,14 @@ export class StoreItems {
         return featured.includes(el.featured);
       });
     }
+
+    res = res.filter(el => {
+      return el.price <= this.elements.priceRange[1] && el.price >= this.elements.priceRange[0];
+    });
+
+    res = res.filter(el => {
+      return el.date <= this.elements.dateRange[1] && el.date >= this.elements.dateRange[0];
+    });
 
     res = res.filter(el => {
       return categories.includes(el.category);
