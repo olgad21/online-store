@@ -20,15 +20,16 @@ export class StoreItems {
     sortType: string,
     cart: Cart,
   } = {
+    //filters: JSON.parse(window.localStorage.getItem('checkboxFilters') as string) || '', //
     filters: [],
     resultData: [],
     itemsContainer: document.getElementsByClassName('items-container')[0] as HTMLDivElement,
     searchRequest: '',
     searchData: [],
-    priceRange: [0, 1000],
-    dateRange: [1990, 2022],
-    sortType: '',
-    cart: new Cart()
+    priceRange: [0, 1000], //
+    dateRange: [1990, 2022], //
+    sortType: JSON.parse(window.localStorage.getItem('sortType') as string) || '', //
+    cart: new Cart() //
   }
 
   initialize(data: ItemInterface[]) {

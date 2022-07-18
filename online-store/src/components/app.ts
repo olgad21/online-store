@@ -20,6 +20,8 @@ export class App {
             filteredResults.elements.filters.filter(el => filter.id !== el.value);
         }
 
+        window.localStorage.setItem('checkboxFilters', JSON.stringify(filteredResults.elements.filters));
+
         filteredResults.applyFilters(data);
       });
     });
@@ -31,8 +33,8 @@ export class App {
    });
  
    filteredResults.elements.resultData = data;
- 
-   filteredResults.initialize(filteredResults.elements.resultData);
+
+   filteredResults.applyFilters(data);
   
 
     //Add Event listener to search bar
@@ -65,7 +67,7 @@ export class App {
       filteredResults.applyFilters(data);
     }
 
-    //Add Range Filters
+    //Add Event listener to Range Filters
     const priceSliders = Array.from(document.querySelectorAll<HTMLInputElement>('#priceRange'));
     const yearSliders = Array.from(document.querySelectorAll<HTMLInputElement>('#yearRange'));
 
@@ -99,6 +101,14 @@ export class App {
        });
     }
 
+    function resetSlider(sliders: HTMLInputElement[], minValue:HTMLElement, maxValue:HTMLElement, outputArr: number[]){
+      sliders[0].value = minValue.innerHTML = `${sliders[0].min}`;
+      sliders[1].value = maxValue.innerHTML = `${sliders[1].max}`;
+      outputArr[0] = +sliders[0].value;
+      outputArr[1] = +sliders[1].value;
+      filteredResults.applyFilters(data);
+    }
+
     handleSlider(priceSliders, sliderMinPrice, sliderMaxPrice, filteredResults.elements.priceRange);
     handleSlider(yearSliders, sliderMinYear, sliderMaxYear, filteredResults.elements.dateRange);
 
@@ -107,6 +117,7 @@ export class App {
     const select = document.querySelector<HTMLSelectElement>('select');
     select?.addEventListener('change', (e) => {
       filteredResults.elements.sortType = (e.target as HTMLSelectElement).value;
+      window.localStorage.setItem('sortType', JSON.stringify(filteredResults.elements.sortType));
       filteredResults.applyFilters(data);
     
     });
@@ -120,7 +131,28 @@ export class App {
 
   
     //RESET FILTERS
-    // const resetFiltersBtn = document.querySelector('.reset-filters-btn');
+    const resetFiltersBtn = document.querySelector('.reset-filters-btn');
+    resetFiltersBtn?.addEventListener('click', resetFilters);
+    
+    function resetFilters(){
+      filteredResults.elements.filters = [];
+
+      filtersCheckbox.forEach(filter => {
+        if (filter.name === 'featured'){
+          filter.checked = false;
+        } else {
+          filter.checked = true;
+        }
+        if (filter.checked){
+          filteredResults.addToFilters(filter);
+        }
+     });
+
+     resetSlider(priceSliders, sliderMinPrice, sliderMaxPrice, filteredResults.elements.priceRange);
+     resetSlider(yearSliders, sliderMinYear, sliderMaxYear, filteredResults.elements.dateRange);
+
+    filteredResults.applyFilters(data);
+    }
 
 
     // //RESET All SETTINGS

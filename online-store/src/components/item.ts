@@ -1,6 +1,4 @@
 import { ItemInterface } from '../components/itemsData';
-// import { Cart } from '../components/cart';
-//import { StoreItems } from './storeItems';
 import './item.css';
 
 class Item {
@@ -38,9 +36,6 @@ class Item {
       //const item = document.createElement('div');
       this.elements.item.className = 'item';
       this.elements.item.classList.add('col-4');
-
-      // const itemBody = document.createElement('div');
-      // itemBody.classList.add('card-body');
   
       const itemImage = document.createElement('img');
       itemImage.className = 'item__img';
