@@ -151,9 +151,25 @@
               <p class="filters__year-max-value">2022</p>
             </div> 
           </div>
+          <button class="btn btn-light reset-filters-btn">Reset filters</button>
+          <button class="btn btn-light reset-settings-btn">Reset settings</button>
         </section>
-        <section class="container-xxl col-9">
-          <div class="row justify-content-between items-container">
+        <section class="col-9">
+          <div class="sort-options">
+            <form>
+              <label for="sort">Sort by</label>
+              <select name="sort" id="sort" class="form-select">
+                <option>Choose</option>
+                <option value="price-lowest">Price (Lowest to Highest)</option>
+                <option value="price-highest">Price (Highest to Lowest)</option>
+                <option value="name-a">Name (A - Z)</option>
+                <option value="name-z">Name (Z - A)</option>
+              </select>
+            </form>
+          </div>
+          <div class="container-xxl">
+            <div class="row justify-content-between items-container">
+            </div>
           </div>
         </section>
       </div>

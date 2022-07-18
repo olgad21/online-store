@@ -42,10 +42,7 @@ body {
   font-size: 400%;
   text-align: center;
 }
-/* .header,
-.footer {
-  background-color: grey;
-} */
+
 .filters__search input {
   margin-bottom: 0.5rem;
 }
@@ -56,7 +53,7 @@ body {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 1rem;
+  margin: 0.5rem 0 1rem;
 }
 
 .filters__checkboxes{
@@ -76,20 +73,6 @@ input[type="range"] {
   display: block;
   margin: 0;
 }
-
-/* input[type="range"]{
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  width: 100%;
-  outline: none;
-  position: absolute;
-  margin: auto;
-  top: 0;
-  bottom: 0;
-  background-color: transparent;
-  pointer-events: none;
-} */
 
 input[type="range"]:last-child{
   margin-top: -2em;
@@ -112,6 +95,15 @@ input[type="range"]::-ms-thumb {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.sort-options{
+  margin-bottom: 1rem;
+}
+
+.sort-options form {
+  width: 20%;
+  margin-left: auto;
 }
 
 .items {

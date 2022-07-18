@@ -100,19 +100,19 @@ class Item {
       return this.elements.item
   }
 
-  handleCart(e:Event){
+  handleCart = (e:Event) => {
     const cart = new Cart();
 
-    console.log('click');
+    console.log(this, 33333)
     const target = e.target as Element; //куда кликнули
-    //TODO: Менять свойство incart у объекта item
-
+  
     // if item is in the cart
-    if (target.classList.contains('item--active') || (target.parentNode as HTMLDivElement)?.classList.contains('item--active')){
+    if ((target.classList.contains('item--active') || (target.parentNode as HTMLDivElement)?.classList.contains('item--active'))){
       
       target.classList.remove('item--active');
       (target.parentNode as HTMLElement)?.classList.remove('item--active');
       cart.decreaseNumber();
+      cart.itemsInCart.splice(cart.itemsInCart.indexOf(this.name), 1);
       return
     }
 
@@ -128,6 +128,7 @@ class Item {
       if (!target.classList.contains('item--active')){
         target.classList.add('item--active');
         cart.increaseNumber();
+        cart.itemsInCart.push(this.name);
         return
       }
     }
@@ -136,6 +137,7 @@ class Item {
       if (!(target.parentNode as HTMLDivElement)?.classList.contains('item--active')){
         (target.parentNode as HTMLDivElement)?.classList.add('item--active');
         cart.increaseNumber();
+        cart.itemsInCart.push(this.name);
         return
       }
     }

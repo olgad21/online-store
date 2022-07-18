@@ -1,5 +1,6 @@
 import Item from '../components/item';
 import { ItemInterface } from '../components/itemsData';
+//import { Cart } from '../components/cart';
 
 type Filter = {
   type: string,
@@ -8,7 +9,16 @@ type Filter = {
 
 export class StoreItems {
 
-  elements: {filters: Filter[], resultData: ItemInterface[], itemsContainer: HTMLDivElement, searchRequest: string, searchData: ItemInterface[], priceRange: number[], dateRange: number[]} = {
+  elements: {
+    filters: Filter[], 
+    resultData: ItemInterface[], 
+    itemsContainer: HTMLDivElement, 
+    searchRequest: string, 
+    searchData: ItemInterface[], 
+    priceRange: number[], 
+    dateRange: number[],
+    sortType: string,
+  } = {
     filters: [],
     resultData: [],
     itemsContainer: document.getElementsByClassName('items-container')[0] as HTMLDivElement,
@@ -16,6 +26,7 @@ export class StoreItems {
     searchData: [],
     priceRange: [0, 1000],
     dateRange: [1990, 2022],
+    sortType: '',
   }
 
   initialize(data: ItemInterface[]) {
@@ -65,6 +76,46 @@ export class StoreItems {
 
     if (this.elements.searchData.length !== 0){
       res = this.elements.searchData;
+    }
+
+    if (this.elements.sortType){
+      switch (this.elements.sortType){
+        case 'name-a':
+        res.sort(function(a, b){
+          if (a.name < b.name) {
+            return -1;
+          }
+          if (a.name > b.name) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+
+        case 'name-z':
+        res.sort(function(a, b){
+          if (a.name > b.name) {
+            return -1;
+          }
+          if (a.name < b.name) {
+            return 1;
+          }
+          return 0;
+        });
+        break;
+
+        case 'price-lowest':
+        res.sort(function(a, b){
+          return a.price - b.price;
+        });
+        break;
+
+        case 'price-highest':
+        res.sort(function(a, b){
+          return b.price - a.price;
+        });
+        break;
+      }
     }
 
     if (featured.length !== 0){

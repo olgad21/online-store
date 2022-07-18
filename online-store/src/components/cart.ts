@@ -3,10 +3,12 @@ export class Cart {
 
   numberInCartEl: Element;
   numberInCart: number;
+  itemsInCart: string[];
 
   constructor(){
     this.numberInCartEl = document.querySelector('.shopping-card__number') as Element;
     this.numberInCart = Number(this.numberInCartEl?.innerHTML);
+    this.itemsInCart = [];
   }
 
   increaseNumber(){

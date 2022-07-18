@@ -69,7 +69,7 @@ export const items: ItemInterface[] = [
     size: Size.Small
   },
   {
-    name: 'Wraps 6" Small Bowl',
+    name: '6" Small Bowl',
     description: '6" Diameter   2 1/2" Height',
     color: 'Green',
     category: 'Bowls',
@@ -93,7 +93,7 @@ export const items: ItemInterface[] = [
     size: Size.Large
   },
   {
-    name: 'Cylinder Flower Vase',
+    name: 'Cylinder Vase',
     description: '7 3/8" Diameter x 7 5/8" Height',
     color: 'Gold',
     category: 'Vases',

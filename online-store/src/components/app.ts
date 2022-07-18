@@ -101,5 +101,23 @@ export class App {
 
     handleSlider(priceSliders, sliderMinPrice, sliderMaxPrice, filteredResults.elements.priceRange);
     handleSlider(yearSliders, sliderMinYear, sliderMaxYear, filteredResults.elements.dateRange);
+
+    //Add sorting
+
+    const select = document.querySelector<HTMLSelectElement>('select');
+    select?.addEventListener('change', (e) => {
+      filteredResults.elements.sortType = (e.target as HTMLSelectElement).value;
+      console.log(filteredResults.elements.sortType);
+      filteredResults.applyFilters(data);
+      
+    });
+
+  
+    //RESET FILTERS
+    // const resetFiltersBtn = document.querySelector('.reset-filters-btn');
+
+
+    // //RESET All SETTINGS
+    // const resetFiltersBtn = document.querySelector('.reset-settings-btn');
   } 
 }
