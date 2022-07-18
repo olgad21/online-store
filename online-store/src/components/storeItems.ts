@@ -20,8 +20,8 @@ export class StoreItems {
     sortType: string,
     cart: Cart,
   } = {
-    //filters: JSON.parse(window.localStorage.getItem('checkboxFilters') as string) || '', //
-    filters: [],
+    filters: JSON.parse(window.localStorage.getItem('checkboxFilters') as string) || [], //
+    // filters: [],
     resultData: [],
     itemsContainer: document.getElementsByClassName('items-container')[0] as HTMLDivElement,
     searchRequest: '',
@@ -62,12 +62,12 @@ export class StoreItems {
 
   addToFilters(filter: HTMLInputElement){
     this.elements.filters.push({ type: filter.name, value: filter.value }); 
-  }    
+  }
 
   applyFilters(data: ItemInterface[]){
     this.remove();
     this.elements.resultData = [];
-
+    console.log(444)
     const categories: string[] = [];
     const sizes: string[] = [];
     const colors: string[] = [];

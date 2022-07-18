@@ -4,23 +4,19 @@ import { Cart } from './cart';
 
 export class App {
   start(data: ItemInterface[]) {
-    
     const filtersCheckbox = Array.from(document.querySelectorAll('input[type=checkbox]')) as HTMLInputElement[];
     const filteredResults = new StoreItems(); 
     filteredResults.elements.cart = new Cart();
 
-    //Add Event listener to checkboxes
+    // Add Event listener to checkboxes
     filtersCheckbox.forEach(filter => {
       filter.addEventListener('click', () => {
-        
         if (filter.checked) {
           filteredResults.addToFilters(filter);
         } else {
           filteredResults.elements.filters =
             filteredResults.elements.filters.filter(el => filter.id !== el.value);
         }
-
-        window.localStorage.setItem('checkboxFilters', JSON.stringify(filteredResults.elements.filters));
 
         filteredResults.applyFilters(data);
       });
@@ -34,7 +30,20 @@ export class App {
  
    filteredResults.elements.resultData = data;
 
+  //  filtersCheckbox.forEach(filter => {
+  //   filteredResults.elements.filters.forEach(storedFilter => {
+  //     if (storedFilter.value === filter.value){
+  //       filter.checked = true;
+  //     } else {
+  //       filter.checked = false;
+  //     }
+  //   })
+  // })
+
    filteredResults.applyFilters(data);
+
+   console.log(filteredResults.elements.filters);
+   //window.localStorage.setItem('checkboxFilters', JSON.stringify(filteredResults.elements.filters));
   
 
     //Add Event listener to search bar
@@ -119,9 +128,12 @@ export class App {
       filteredResults.elements.sortType = (e.target as HTMLSelectElement).value;
       window.localStorage.setItem('sortType', JSON.stringify(filteredResults.elements.sortType));
       filteredResults.applyFilters(data);
-    
     });
 
+    if (select){
+      select.value = filteredResults?.elements.sortType || 'default';
+    }
+    
     //Handle Cart
     const itemsDiv = Array.from(document.querySelectorAll('.item')) as HTMLDivElement[];
 
