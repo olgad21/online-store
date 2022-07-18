@@ -1,11 +1,13 @@
 import { StoreItems } from '../components/storeItems';
 import { ItemInterface } from '../components/itemsData';
+import { Cart } from './cart';
 
 export class App {
   start(data: ItemInterface[]) {
     
     const filtersCheckbox = Array.from(document.querySelectorAll('input[type=checkbox]')) as HTMLInputElement[];
     const filteredResults = new StoreItems(); 
+    filteredResults.elements.cart = new Cart();
 
     //Add Event listener to checkboxes
     filtersCheckbox.forEach(filter => {
@@ -17,8 +19,6 @@ export class App {
           filteredResults.elements.filters =
             filteredResults.elements.filters.filter(el => filter.id !== el.value);
         }
-
-        console.log(filteredResults.elements.filters);
 
         filteredResults.applyFilters(data);
       });
@@ -107,9 +107,15 @@ export class App {
     const select = document.querySelector<HTMLSelectElement>('select');
     select?.addEventListener('change', (e) => {
       filteredResults.elements.sortType = (e.target as HTMLSelectElement).value;
-      console.log(filteredResults.elements.sortType);
       filteredResults.applyFilters(data);
-      
+    
+    });
+
+    //Handle Cart
+    const itemsDiv = Array.from(document.querySelectorAll('.item')) as HTMLDivElement[];
+
+    itemsDiv.forEach(itemDiv => {
+      itemDiv.addEventListener('click', filteredResults.handleCart)
     });
 
   

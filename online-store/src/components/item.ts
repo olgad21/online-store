@@ -1,5 +1,6 @@
 import { ItemInterface } from '../components/itemsData';
-import { Cart } from '../components/cart';
+// import { Cart } from '../components/cart';
+//import { StoreItems } from './storeItems';
 import './item.css';
 
 class Item {
@@ -94,53 +95,7 @@ class Item {
       this.elements.itemButton.innerHTML = 'Add to cart';
       itemFeatured.after(this.elements.itemButton);
 
-      
-      this.elements.item.addEventListener('click', this.handleCart);
-
       return this.elements.item
-  }
-
-  handleCart = (e:Event) => {
-    const cart = new Cart();
-
-    console.log(this, 33333)
-    const target = e.target as Element; //куда кликнули
-  
-    // if item is in the cart
-    if ((target.classList.contains('item--active') || (target.parentNode as HTMLDivElement)?.classList.contains('item--active'))){
-      
-      target.classList.remove('item--active');
-      (target.parentNode as HTMLElement)?.classList.remove('item--active');
-      cart.decreaseNumber();
-      cart.itemsInCart.splice(cart.itemsInCart.indexOf(this.name), 1);
-      return
-    }
-
-    //if item is not in the cart
-
-    if (cart.numberInCart === 4){
-      console.log('limit');
-      cart.createPopup();
-      return
-    }
-
-    if (target.classList.contains('item')){
-      if (!target.classList.contains('item--active')){
-        target.classList.add('item--active');
-        cart.increaseNumber();
-        cart.itemsInCart.push(this.name);
-        return
-      }
-    }
-
-    if (!target.classList.contains('item')){
-      if (!(target.parentNode as HTMLDivElement)?.classList.contains('item--active')){
-        (target.parentNode as HTMLDivElement)?.classList.add('item--active');
-        cart.increaseNumber();
-        cart.itemsInCart.push(this.name);
-        return
-      }
-    }
   }
 }
 

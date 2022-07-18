@@ -1,6 +1,6 @@
+import { Cart } from '../components/cart';
 import Item from '../components/item';
 import { ItemInterface } from '../components/itemsData';
-//import { Cart } from '../components/cart';
 
 type Filter = {
   type: string,
@@ -18,6 +18,7 @@ export class StoreItems {
     priceRange: number[], 
     dateRange: number[],
     sortType: string,
+    cart: Cart,
   } = {
     filters: [],
     resultData: [],
@@ -27,10 +28,22 @@ export class StoreItems {
     priceRange: [0, 1000],
     dateRange: [1990, 2022],
     sortType: '',
+    cart: new Cart()
   }
 
   initialize(data: ItemInterface[]) {
-    this.elements.itemsContainer?.append(...this.createItems(data));
+    const itemDivs = this.createItems(data);
+
+    itemDivs.map(item => {
+      item.addEventListener('click', this.handleCart);
+
+      const itemName = (item.childNodes[1] as HTMLElement).innerHTML;
+      if (this.elements.cart.itemsInCart.includes(itemName)){
+        item.classList.add('item--active');
+      }
+    })
+    
+    this.elements.itemsContainer?.append(...itemDivs);
   }
 
   remove(){
@@ -42,7 +55,6 @@ export class StoreItems {
   createItems(itemsData: ItemInterface[]){
     return itemsData.map(itemObj => {
       const item = new Item(itemObj);
-      
       return item.draw();
     }); 
   }
@@ -159,5 +171,60 @@ export class StoreItems {
     errorMessage.classList.add('error-text');
     errorMessage.innerHTML = 'Sorry, no results found';
     this.elements.itemsContainer?.append(errorMessage);
+  }
+
+  handleCart = (e:Event) => {
+    const cart = new Cart();
+    const target = e.target as Element; //куда кликнули
+  
+    // if item is in the cart
+    if (target.classList.contains('item')){
+      if (target.classList.contains('item--active')){
+        target.classList.remove('item--active');
+        const itemName = (target.childNodes[1] as HTMLElement).innerHTML;
+        this.elements.cart.decreaseNumber();
+        this.elements.cart.itemsInCart.splice(this.elements.cart.itemsInCart.indexOf(itemName), 1);
+        console.log(this.elements.cart.itemsInCart);
+        return
+      }
+    } else {
+      if ((target.parentNode as HTMLDivElement)?.classList.contains('item--active')){
+      (target.parentNode as HTMLElement)?.classList.remove('item--active');
+      const itemName = ((target.parentNode as HTMLElement)?.childNodes[1] as HTMLElement).innerHTML;
+      this.elements.cart.decreaseNumber();
+      this.elements.cart.itemsInCart.splice(this.elements.cart.itemsInCart.indexOf(itemName), 1);
+      console.log(this.elements.cart.itemsInCart);
+      return
+    }
+  }
+
+    //if item is not in the cart
+
+    if (cart.numberInCart === 10){
+      cart.createPopup();
+      return
+    }
+
+    if (target.classList.contains('item')){
+      if (!target.classList.contains('item--active')){
+        target.classList.add('item--active');
+        this.elements.cart.increaseNumber();
+        const itemName = (target.childNodes[1] as HTMLElement).innerHTML;
+        this.elements.cart.itemsInCart.push(itemName);
+        console.log(this.elements.cart.itemsInCart);
+        return
+      }
+    }
+
+    if (!target.classList.contains('item')){
+      if (!(target.parentNode as HTMLDivElement)?.classList.contains('item--active')){
+        (target.parentNode as HTMLDivElement)?.classList.add('item--active');
+        this.elements.cart.increaseNumber();
+        const itemName = ((target.parentNode as HTMLDivElement)?.childNodes[1] as HTMLElement).innerHTML;
+        this.elements.cart.itemsInCart.push(itemName);
+        console.log(this.elements.cart.itemsInCart);
+        return
+      }
+    }
   }
 }

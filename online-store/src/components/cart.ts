@@ -22,7 +22,6 @@ export class Cart {
   }
 
   createPopup(){
-    console.log('popup');
     const limitPopup = document.createElement('div');
     document.body.append(limitPopup);
     limitPopup.className = 'cart__popup';
