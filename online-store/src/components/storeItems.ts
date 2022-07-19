@@ -67,7 +67,7 @@ export class StoreItems {
   applyFilters(data: ItemInterface[]){
     this.remove();
     this.elements.resultData = [];
-    console.log(444)
+
     const categories: string[] = [];
     const sizes: string[] = [];
     const colors: string[] = [];
@@ -87,8 +87,10 @@ export class StoreItems {
 
     let res: ItemInterface[] = [...data];
 
-    if (this.elements.searchData.length !== 0){
-      res = this.elements.searchData;
+    if (this.elements.searchRequest) {
+      res = res.filter(dataObj => {
+        return dataObj.name.toLowerCase().includes(this.elements.searchRequest.toLowerCase());
+      });
     }
 
     if (this.elements.sortType){
@@ -157,7 +159,7 @@ export class StoreItems {
       return sizes.includes(el.size);
     });
 
-    if (res.length === 0){
+    if (res.length === 0) {
       this.showError();
     }
 
@@ -167,7 +169,7 @@ export class StoreItems {
     
   }
 
-  showError(){
+  showError() {
     const errorMessage = document.createElement('p');
     errorMessage.classList.add('error-text');
     errorMessage.innerHTML = 'Sorry, no results found';

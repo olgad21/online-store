@@ -47,23 +47,14 @@ export class App {
   
 
     //Add Event listener to search bar
-    const filtersText = document.querySelector('input[type=text]') as HTMLInputElement;
+    const filtersText = document.getElementById('search') as HTMLInputElement;
     const resetBtn = document.querySelector('.reset-btn');
 
     filtersText.focus();
     filtersText.addEventListener('change', () => {
       
-      filteredResults.elements.searchData = [];
-      filteredResults.applyFilters(data);
-
       const searchRequest = filtersText.value.toLowerCase();
       filteredResults.elements.searchRequest = searchRequest;
-
-      filteredResults.elements.resultData.forEach(dataObj => {
-        if (dataObj.name.toLowerCase().includes(searchRequest.toLowerCase())){
-          filteredResults.elements.searchData.push(dataObj);
-        }
-      });
 
       filteredResults.applyFilters(data);
     });
@@ -72,7 +63,8 @@ export class App {
 
     function resetSearch(){
       filtersText.value = '';
-      filteredResults.elements.searchData = [];
+      filteredResults.elements.searchRequest = '';
+      // filteredResults.elements.searchData = [];
       filteredResults.applyFilters(data);
     }
 
