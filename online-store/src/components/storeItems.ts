@@ -1,6 +1,6 @@
-import { Cart } from '../components/cart';
-import Item from '../components/item';
-import { ItemInterface } from '../components/itemsData';
+import { Cart } from './cart';
+import Item from './item';
+import { ItemInterface } from './itemsData';
 
 type Filter = {
   type: string,
@@ -28,16 +28,18 @@ export class StoreItems {
     priceRange: JSON.parse(window.localStorage.getItem('priceRange') as string) || [0, 1000],
     dateRange: JSON.parse(window.localStorage.getItem('yearsRange') as string) || [1990, 2022],
     sortType: JSON.parse(window.localStorage.getItem('sortType') as string) || '', //
-    cart: new Cart() //
+    cart: new Cart(JSON.parse(window.localStorage.getItem('cart') as string) ?? []),
   }
 
   initialize(data: ItemInterface[]) {
     const itemDivs = this.createItems(data);
-    console.log(this.elements.dateRange, this.elements.priceRange,346346);
+    this.elements.cart.setInitialCartValue();
+    
     itemDivs.map(item => {
       item.addEventListener('click', this.handleCart);
 
       const itemName = (item.childNodes[1] as HTMLElement).innerHTML;
+
       if (this.elements.cart.itemsInCart.includes(itemName)){
         item.classList.add('item--active');
       }
@@ -185,6 +187,7 @@ export class StoreItems {
         const itemName = (target.childNodes[1] as HTMLElement).innerHTML;
         this.elements.cart.decreaseNumber();
         this.elements.cart.itemsInCart.splice(this.elements.cart.itemsInCart.indexOf(itemName), 1);
+        window.localStorage.setItem('cart', JSON.stringify(this.elements.cart.itemsInCart));
         console.log(this.elements.cart.itemsInCart);
         return
       }
@@ -194,6 +197,7 @@ export class StoreItems {
       const itemName = ((target.parentNode as HTMLElement)?.childNodes[1] as HTMLElement).innerHTML;
       this.elements.cart.decreaseNumber();
       this.elements.cart.itemsInCart.splice(this.elements.cart.itemsInCart.indexOf(itemName), 1);
+      window.localStorage.setItem('cart', JSON.stringify(this.elements.cart.itemsInCart));
       console.log(this.elements.cart.itemsInCart);
       return
     }
@@ -212,6 +216,7 @@ export class StoreItems {
         this.elements.cart.increaseNumber();
         const itemName = (target.childNodes[1] as HTMLElement).innerHTML;
         this.elements.cart.itemsInCart.push(itemName);
+        window.localStorage.setItem('cart', JSON.stringify(this.elements.cart.itemsInCart));
         console.log(this.elements.cart.itemsInCart);
         return
       }
@@ -223,6 +228,7 @@ export class StoreItems {
         this.elements.cart.increaseNumber();
         const itemName = ((target.parentNode as HTMLDivElement)?.childNodes[1] as HTMLElement).innerHTML;
         this.elements.cart.itemsInCart.push(itemName);
+        window.localStorage.setItem('cart', JSON.stringify(this.elements.cart.itemsInCart));
         console.log(this.elements.cart.itemsInCart);
         return
       }

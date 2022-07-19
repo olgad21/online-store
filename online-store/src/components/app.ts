@@ -1,12 +1,11 @@
-import { StoreItems } from '../components/storeItems';
-import { ItemInterface } from '../components/itemsData';
-import { Cart } from './cart';
+import { StoreItems } from './storeItems';
+import { ItemInterface } from './itemsData';
+//import { items } from './itemsData';
 
 export class App {
   start(data: ItemInterface[]) {
     const filtersCheckbox = Array.from(document.querySelectorAll('input[type=checkbox]')) as HTMLInputElement[];
     const filteredResults = new StoreItems();
-    filteredResults.elements.cart = new Cart();
 
     // Add Event listener to checkboxes
     filtersCheckbox.forEach(filter => {
@@ -164,13 +163,18 @@ export class App {
       });
 
       resetSlider(priceSliders, sliderMinPrice, sliderMaxPrice, filteredResults.elements.priceRange, 'priceRange');
-      resetSlider(yearSliders, sliderMinYear, sliderMaxYear, filteredResults.elements.dateRange, 'priceRange');
+      resetSlider(yearSliders, sliderMinYear, sliderMaxYear, filteredResults.elements.dateRange, 'yearsRange');
 
       filteredResults.applyFilters(data);
     }
 
 
-    // //RESET All SETTINGS
-    // const resetFiltersBtn = document.querySelector('.reset-settings-btn');
+    //RESET All SETTINGS
+    const resetSetsBtn = document.querySelector('.reset-settings-btn');
+    resetSetsBtn?.addEventListener('click', () => {
+      window.localStorage.clear();
+      // this.start(items);
+      window.location.reload();
+    });
   }
 }

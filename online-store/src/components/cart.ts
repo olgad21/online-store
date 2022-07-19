@@ -1,14 +1,25 @@
 import './cart.css';
+// import { items } from './itemsData';
 export class Cart {
 
   numberInCartEl: Element;
   numberInCart: number;
   itemsInCart: string[];
 
-  constructor(){
+  // constructor(){
+  //   this.numberInCartEl = document.querySelector('.shopping-card__number') as Element;
+  //   this.numberInCart = Number(this.numberInCartEl?.innerHTML);
+  //   this.itemsInCart = [];
+  // }
+
+  constructor(itemsInCart: string[]) {
     this.numberInCartEl = document.querySelector('.shopping-card__number') as Element;
-    this.numberInCart = Number(this.numberInCartEl?.innerHTML);
-    this.itemsInCart = [];
+    this.itemsInCart = itemsInCart;
+    this.numberInCart = itemsInCart.length;
+  }
+
+  setInitialCartValue() {
+    this.numberInCartEl.innerHTML = String(this.numberInCart);
   }
 
   increaseNumber(){
