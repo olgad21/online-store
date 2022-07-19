@@ -5,7 +5,7 @@ import { Cart } from './cart';
 export class App {
   start(data: ItemInterface[]) {
     const filtersCheckbox = Array.from(document.querySelectorAll('input[type=checkbox]')) as HTMLInputElement[];
-    const filteredResults = new StoreItems(); 
+    const filteredResults = new StoreItems();
     filteredResults.elements.cart = new Cart();
 
     // Add Event listener to checkboxes
@@ -18,33 +18,31 @@ export class App {
             filteredResults.elements.filters.filter(el => filter.id !== el.value);
         }
 
+        window.localStorage.setItem('checkboxFilters', JSON.stringify(filteredResults.elements.filters));
         filteredResults.applyFilters(data);
       });
     });
 
-   filtersCheckbox.forEach(filter => {
-      if (filter.checked){
-        filteredResults.addToFilters(filter);
-      }
-   });
- 
-   filteredResults.elements.resultData = data;
+    if (filteredResults.elements.filters.length === 0) {
+      filtersCheckbox.forEach(filter => {
+        if (filter.checked) {
+          filteredResults.addToFilters(filter);
+        }
+      });
+    }
 
-  //  filtersCheckbox.forEach(filter => {
-  //   filteredResults.elements.filters.forEach(storedFilter => {
-  //     if (storedFilter.value === filter.value){
-  //       filter.checked = true;
-  //     } else {
-  //       filter.checked = false;
-  //     }
-  //   })
-  // })
+    filteredResults.elements.resultData = data;
 
-   filteredResults.applyFilters(data);
+    // Set checkbox filter's values
+    filtersCheckbox.forEach(filter => {
+      const find = filteredResults.elements.filters.find(storedFilter => {
+        return storedFilter.value === filter.value;
+      });
 
-   console.log(filteredResults.elements.filters);
-   //window.localStorage.setItem('checkboxFilters', JSON.stringify(filteredResults.elements.filters));
-  
+      filter.checked = !!find;
+    })
+
+    filteredResults.applyFilters(data);
 
     //Add Event listener to search bar
     const filtersText = document.getElementById('search') as HTMLInputElement;
@@ -52,7 +50,7 @@ export class App {
 
     filtersText.focus();
     filtersText.addEventListener('change', () => {
-      
+
       const searchRequest = filtersText.value.toLowerCase();
       filteredResults.elements.searchRequest = searchRequest;
 
@@ -61,7 +59,7 @@ export class App {
 
     resetBtn?.addEventListener('click', resetSearch);
 
-    function resetSearch(){
+    function resetSearch() {
       filtersText.value = '';
       filteredResults.elements.searchRequest = '';
       // filteredResults.elements.searchData = [];
@@ -78,40 +76,53 @@ export class App {
     const sliderMinYear = document.querySelector<HTMLElement>('.filters__year-min-value') as HTMLElement;
     const sliderMaxYear = document.querySelector<HTMLElement>('.filters__year-max-value') as HTMLElement;
 
-    function handleSlider(sliders: HTMLInputElement[], minValue:HTMLElement, maxValue:HTMLElement, outputArr: number[]){
-      sliders[0].addEventListener('input', () => {
-        if(+sliders[0].value > +sliders[1].value){
-           sliders[1].value = sliders[0].value.toString();
-         }
-       });
-       
-       sliders[1].addEventListener('input', () => {
-        if(+sliders[1].value < +sliders[0].value){
-           sliders[0].value = sliders[1].value.toString();
-         }
-       });
-       
-       sliders.forEach((slider) => {
-         slider.addEventListener('change', () => {
-           minValue.innerHTML = `${sliders[0].value}`;
-           maxValue.innerHTML = `${sliders[1].value}`;
-           outputArr[0] = +sliders[0].value;
-           outputArr[1] = +sliders[1].value;
-           filteredResults.applyFilters(data);
-         })
-       });
+    function drawSlider(sliders: HTMLInputElement[], minValue: HTMLElement, maxValue: HTMLElement, outputArr: number[]){
+      sliders[0].value = outputArr[0].toString();
+      sliders[1].value = outputArr[1].toString();
+
+      minValue.innerHTML = `${sliders[0].value}`;
+      maxValue.innerHTML = `${sliders[1].value}`;
     }
 
-    function resetSlider(sliders: HTMLInputElement[], minValue:HTMLElement, maxValue:HTMLElement, outputArr: number[]){
+    function handleSlider(sliders: HTMLInputElement[], minValue: HTMLElement, maxValue: HTMLElement, outputArr: number[], storeName: string) {
+      sliders[0].addEventListener('input', () => {
+        if (+sliders[0].value > +sliders[1].value) {
+          sliders[1].value = sliders[0].value.toString();
+        }
+      });
+
+      sliders[1].addEventListener('input', () => {
+        if (+sliders[1].value < +sliders[0].value) {
+          sliders[0].value = sliders[1].value.toString();
+        }
+      });
+
+      sliders.forEach((slider) => {
+        slider.addEventListener('change', () => {
+          minValue.innerHTML = `${sliders[0].value}`;
+          maxValue.innerHTML = `${sliders[1].value}`;
+          outputArr[0] = +sliders[0].value;
+          outputArr[1] = +sliders[1].value;
+          window.localStorage.setItem(storeName, JSON.stringify(outputArr));
+          filteredResults.applyFilters(data);
+        })
+      });
+    }
+
+    function resetSlider(sliders: HTMLInputElement[], minValue: HTMLElement, maxValue: HTMLElement, outputArr: number[], storeName: string) {
       sliders[0].value = minValue.innerHTML = `${sliders[0].min}`;
       sliders[1].value = maxValue.innerHTML = `${sliders[1].max}`;
       outputArr[0] = +sliders[0].value;
       outputArr[1] = +sliders[1].value;
+      window.localStorage.setItem(storeName, JSON.stringify(outputArr));
       filteredResults.applyFilters(data);
     }
 
-    handleSlider(priceSliders, sliderMinPrice, sliderMaxPrice, filteredResults.elements.priceRange);
-    handleSlider(yearSliders, sliderMinYear, sliderMaxYear, filteredResults.elements.dateRange);
+    drawSlider(priceSliders, sliderMinPrice, sliderMaxPrice, filteredResults.elements.priceRange);
+    drawSlider(yearSliders, sliderMinYear, sliderMaxYear, filteredResults.elements.dateRange);
+
+    handleSlider(priceSliders, sliderMinPrice, sliderMaxPrice, filteredResults.elements.priceRange, 'priceRange');
+    handleSlider(yearSliders, sliderMinYear, sliderMaxYear, filteredResults.elements.dateRange, 'yearsRange');
 
     //Add sorting
 
@@ -122,10 +133,10 @@ export class App {
       filteredResults.applyFilters(data);
     });
 
-    if (select){
+    if (select) {
       select.value = filteredResults?.elements.sortType || 'default';
     }
-    
+
     //Handle Cart
     const itemsDiv = Array.from(document.querySelectorAll('.item')) as HTMLDivElement[];
 
@@ -133,33 +144,33 @@ export class App {
       itemDiv.addEventListener('click', filteredResults.handleCart)
     });
 
-  
+
     //RESET FILTERS
     const resetFiltersBtn = document.querySelector('.reset-filters-btn');
     resetFiltersBtn?.addEventListener('click', resetFilters);
-    
-    function resetFilters(){
+
+    function resetFilters() {
       filteredResults.elements.filters = [];
 
       filtersCheckbox.forEach(filter => {
-        if (filter.name === 'featured'){
+        if (filter.name === 'featured') {
           filter.checked = false;
         } else {
           filter.checked = true;
         }
-        if (filter.checked){
+        if (filter.checked) {
           filteredResults.addToFilters(filter);
         }
-     });
+      });
 
-     resetSlider(priceSliders, sliderMinPrice, sliderMaxPrice, filteredResults.elements.priceRange);
-     resetSlider(yearSliders, sliderMinYear, sliderMaxYear, filteredResults.elements.dateRange);
+      resetSlider(priceSliders, sliderMinPrice, sliderMaxPrice, filteredResults.elements.priceRange, 'priceRange');
+      resetSlider(yearSliders, sliderMinYear, sliderMaxYear, filteredResults.elements.dateRange, 'priceRange');
 
-    filteredResults.applyFilters(data);
+      filteredResults.applyFilters(data);
     }
 
 
     // //RESET All SETTINGS
     // const resetFiltersBtn = document.querySelector('.reset-settings-btn');
-  } 
+  }
 }

@@ -21,20 +21,19 @@ export class StoreItems {
     cart: Cart,
   } = {
     filters: JSON.parse(window.localStorage.getItem('checkboxFilters') as string) || [], //
-    // filters: [],
     resultData: [],
     itemsContainer: document.getElementsByClassName('items-container')[0] as HTMLDivElement,
     searchRequest: '',
     searchData: [],
-    priceRange: [0, 1000], //
-    dateRange: [1990, 2022], //
+    priceRange: JSON.parse(window.localStorage.getItem('priceRange') as string) || [0, 1000],
+    dateRange: JSON.parse(window.localStorage.getItem('yearsRange') as string) || [1990, 2022],
     sortType: JSON.parse(window.localStorage.getItem('sortType') as string) || '', //
     cart: new Cart() //
   }
 
   initialize(data: ItemInterface[]) {
     const itemDivs = this.createItems(data);
-
+    console.log(this.elements.dateRange, this.elements.priceRange,346346);
     itemDivs.map(item => {
       item.addEventListener('click', this.handleCart);
 
@@ -61,7 +60,7 @@ export class StoreItems {
   }
 
   addToFilters(filter: HTMLInputElement){
-    this.elements.filters.push({ type: filter.name, value: filter.value }); 
+    this.elements.filters.push({ type: filter.name, value: filter.value });
   }
 
   applyFilters(data: ItemInterface[]){
@@ -177,7 +176,6 @@ export class StoreItems {
   }
 
   handleCart = (e:Event) => {
-    const cart = new Cart();
     const target = e.target as Element; //куда кликнули
   
     // if item is in the cart
@@ -203,8 +201,8 @@ export class StoreItems {
 
     //if item is not in the cart
 
-    if (cart.numberInCart === 10){
-      cart.createPopup();
+    if (this.elements.cart.numberInCart === 10){
+      this.elements.cart.createPopup();
       return
     }
 
