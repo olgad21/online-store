@@ -24,3 +24,15 @@
   background-color: #A0AECD;
   border-color: #A0AECD;
 }
+
+@media screen and (max-width: 1200px){
+  .item.col-4 {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 767px){
+  .item.col-4 {
+    width: 100%;
+  }
+}

@@ -184,3 +184,15 @@ input[type="range"]::-ms-thumb {
     background: url(https://rs.school/images/rs_school_js.svg) no-repeat;
     margin-top: 15px;
 }
+
+@media screen and (max-width: 1200px){
+  .wrapper {
+    max-width: 768px;
+  }
+}
+
+@media screen and (max-width: 800px){
+  .wrapper {
+    max-width: 700px;
+  }
+}
