@@ -13,11 +13,14 @@
         <h1 class="title">Hola Ceramics</h1>
         <div class="shopping-cart">
           <!-- <img class="shopping-card__img" src="assets/263142.png"></img> -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
+            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+          </svg>
           <p class="shopping-card__number">0</p>
         </div>
       </div>
     </header>
-    <main container-xxl>
+    <main container-xl>
       <div class="row">
         <section class="filters col-3">
           <div class="filters__search">
@@ -30,25 +33,25 @@
             <div class="filters__categories">
                 <p>Choose category</p>
                 <div class="form-check">
-                  <input class="form-check-input" name="category" type="checkbox" value="Bowls" id="Bowls" checked>
+                  <input class="form-check-input filters-checkbox" name="category" type="checkbox" value="Bowls" id="Bowls" checked>
                   <label class="form-check-label" for="Bowls">
                     Bowls
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" name="category" type="checkbox" value="Plates" id="Plates" checked>
+                  <input class="form-check-input filters-checkbox" name="category" type="checkbox" value="Plates" id="Plates" checked>
                   <label class="form-check-label" for="Plates">
                     Plates
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" name="category" type="checkbox" value="Cups" id="Cups" checked>
+                  <input class="form-check-input filters-checkbox" name="category" type="checkbox" value="Cups" id="Cups" checked>
                   <label class="form-check-label" for="Cups">
                     Cups
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" name="category" type="checkbox" value="Vases" id="Vases" checked>
+                  <input class="form-check-input filters-checkbox" name="category" type="checkbox" value="Vases" id="Vases" checked>
                   <label class="form-check-label" for="Vases">
                     Vases
                   </label>
@@ -57,43 +60,43 @@
             <div class="filters__colors">
                 <p>Choose color</p>
                 <div class="form-check">
-                  <input class="form-check-input" name="color" type="checkbox" value="Green" id="Green" checked>
+                  <input class="form-check-input filters-checkbox" name="color" type="checkbox" value="Green" id="Green" checked>
                   <label class="form-check-label" for="Green">
                     Green
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" name="color" type="checkbox" value="Gold" id="Gold" checked>
+                  <input class="form-check-input filters-checkbox" name="color" type="checkbox" value="Gold" id="Gold" checked>
                   <label class="form-check-label" for="Gold">
                     Gold
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" name="color" type="checkbox" value="Pink" id="Pink" checked>
+                  <input class="form-check-input filters-checkbox" name="color" type="checkbox" value="Pink" id="Pink" checked>
                   <label class="form-check-label" for="Pink">
                     Pink
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" name="color" type="checkbox" value="Blue" id="Blue" checked>
+                  <input class="form-check-input filters-checkbox" name="color" type="checkbox" value="Blue" id="Blue" checked>
                   <label class="form-check-label" for="Vases">
                     Blue
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" name="color" type="checkbox" value="Black" id="Black" checked>
+                  <input class="form-check-input filters-checkbox" name="color" type="checkbox" value="Black" id="Black" checked>
                   <label class="form-check-label" for="Black">
                     Black
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" name="color" type="checkbox" value="Silver" id="Silver" checked>
+                  <input class="form-check-input filters-checkbox" name="color" type="checkbox" value="Silver" id="Silver" checked>
                   <label class="form-check-label" for="Silver">
                     Silver
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" name="color" type="checkbox" value="White" id="White" checked>
+                  <input class="form-check-input filters-checkbox" name="color" type="checkbox" value="White" id="White" checked>
                   <label class="form-check-label" for="White">
                     White
                   </label>
@@ -101,7 +104,7 @@
             </div>
             <div class="filters__featured">
               <div class="form-check">
-                <input class="form-check-input" name="featured" type="checkbox" value="true" id="true">
+                <input class="form-check-input filters-checkbox" name="featured" type="checkbox" value="true" id="true">
                 <label class="form-check-label" for="true">
                   Featured Only
                 </label>
@@ -110,19 +113,19 @@
             <div class="filters__size">
                 <p>Choose size</p>
                 <div class="form-check">
-                  <input class="form-check-input" name="size" type="checkbox" value="Small" id="Small" checked>
+                  <input class="form-check-input filters-checkbox" name="size" type="checkbox" value="Small" id="Small" checked>
                   <label class="form-check-label" for="Small">
                     Small
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" name="size" type="checkbox" value="Medium" id="Medium" checked>
+                  <input class="form-check-input filters-checkbox" name="size" type="checkbox" value="Medium" id="Medium" checked>
                   <label class="form-check-label" for="White">
                     Medium
                   </label>
                 </div>
                 <div class="form-check">
-                  <input class="form-check-input" name="size" type="checkbox" value="Large" id="Large" checked>
+                  <input class="form-check-input filters-checkbox" name="size" type="checkbox" value="Large" id="Large" checked>
                   <label class="form-check-label" for="Large">
                     Large
                   </label>
@@ -167,7 +170,7 @@
               </select>
             </form>
           </div>
-          <div class="container-xxl">
+          <div class="container">
             <div class="row justify-content-between items-container">
             </div>
           </div>

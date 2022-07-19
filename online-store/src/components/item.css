@@ -2,11 +2,25 @@
   margin: 2rem 0;
 }
 
+.item:hover{
+  cursor: pointer;
+}
+
 .item--active{
   opacity: 0.6;
+}
+
+.item--active .btn.card-button{
+  background-color: #A0AECD;
+  border-color: #A0AECD;
 }
 
 .item__img {
   display: block;
   max-width: 300px;
+}
+
+.item:hover .btn.card-button{
+  background-color: #A0AECD;
+  border-color: #A0AECD;
 }

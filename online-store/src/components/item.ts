@@ -86,7 +86,7 @@ class Item {
       itemSize.after(itemFeatured);
 
       //const itemButton = document.createElement('div');
-      this.elements.itemButton.classList.add('btn', 'btn-dark');
+      this.elements.itemButton.classList.add('btn', 'btn-dark', 'card-button');
       this.elements.itemButton.innerHTML = 'Add to cart';
       itemFeatured.after(this.elements.itemButton);
 

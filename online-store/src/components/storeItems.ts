@@ -42,6 +42,8 @@ export class StoreItems {
 
       if (this.elements.cart.itemsInCart.includes(itemName)){
         item.classList.add('item--active');
+        (item.childNodes[7] as HTMLElement).innerHTML = 'Added';
+
       }
     })
     
@@ -188,7 +190,7 @@ export class StoreItems {
         this.elements.cart.decreaseNumber();
         this.elements.cart.itemsInCart.splice(this.elements.cart.itemsInCart.indexOf(itemName), 1);
         window.localStorage.setItem('cart', JSON.stringify(this.elements.cart.itemsInCart));
-        console.log(this.elements.cart.itemsInCart);
+        (target.childNodes[7] as HTMLElement).innerHTML = 'Add to cart';
         return
       }
     } else {
@@ -198,14 +200,14 @@ export class StoreItems {
       this.elements.cart.decreaseNumber();
       this.elements.cart.itemsInCart.splice(this.elements.cart.itemsInCart.indexOf(itemName), 1);
       window.localStorage.setItem('cart', JSON.stringify(this.elements.cart.itemsInCart));
-      console.log(this.elements.cart.itemsInCart);
+      ((target.parentNode as HTMLElement)?.childNodes[7] as HTMLElement).innerHTML = 'Add to cart';
       return
     }
   }
 
     //if item is not in the cart
 
-    if (this.elements.cart.numberInCart === 10){
+    if (this.elements.cart.numberInCart === 9){
       this.elements.cart.createPopup();
       return
     }
@@ -217,7 +219,7 @@ export class StoreItems {
         const itemName = (target.childNodes[1] as HTMLElement).innerHTML;
         this.elements.cart.itemsInCart.push(itemName);
         window.localStorage.setItem('cart', JSON.stringify(this.elements.cart.itemsInCart));
-        console.log(this.elements.cart.itemsInCart);
+        (target.childNodes[7] as HTMLElement).innerHTML = 'Added';
         return
       }
     }
@@ -229,7 +231,7 @@ export class StoreItems {
         const itemName = ((target.parentNode as HTMLDivElement)?.childNodes[1] as HTMLElement).innerHTML;
         this.elements.cart.itemsInCart.push(itemName);
         window.localStorage.setItem('cart', JSON.stringify(this.elements.cart.itemsInCart));
-        console.log(this.elements.cart.itemsInCart);
+        ((target.parentNode as HTMLDivElement)?.childNodes[7] as HTMLElement).innerHTML = 'Added';
         return
       }
     }

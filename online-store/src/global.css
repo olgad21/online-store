@@ -32,6 +32,41 @@ body {
 
 .shopping-cart{
   position: relative;
+  width: 30px;
+  height: 30px;
+}
+
+.shopping-card__number{
+  position:absolute;
+  left: 35%;
+  top: 25%;
+}
+
+select:hover,
+input[type="checkbox"]:hover{
+  cursor: pointer;
+}
+
+.form-check-input.filters-checkbox:checked{
+  background-color: #FF6A3D;
+  border-color: #FF6A3D;
+}
+
+.form-check-input.filters-checkbox:hover{
+  background-color: #ff6a3db7;
+  border-color: #ff6a3db7;
+}
+
+.btn.btn-dark.search-btn:hover{
+  background-color: #132d75;
+  border-color: #132d75;
+}
+
+.btn.btn-light.reset-btn:hover,
+.btn.btn-light.reset-settings-btn:hover,
+.btn.btn-light.reset-filters-btn:hover{
+  background-color: #F4DB7D;
+  border-color: #F4DB7D;
 }
 
 .items-container {
@@ -80,6 +115,12 @@ input[type="range"]:last-child{
 
 input[type="range"]::-webkit-slider-thumb {
   pointer-events: all;
+  background-color:coral;
+  z-index: 2;
+}
+
+input[type="range"]::-webkit-slider {
+  z-index: 1;
 }
 
 input[type="range"]::-moz-range-thumb {
