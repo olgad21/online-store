@@ -19,7 +19,7 @@ const baseConfig = {
             {
                 test: /\.[tj]s$/,
                 use: 'ts-loader',
-                exclude: /node_modules/, 
+                exclude: [/node_modules/], 
             },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,

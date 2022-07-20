@@ -173,7 +173,6 @@ export class App {
     const resetSetsBtn = document.querySelector('.reset-settings-btn');
     resetSetsBtn?.addEventListener('click', () => {
       window.localStorage.clear();
-      // this.start(items);
       window.location.reload();
     });
   }

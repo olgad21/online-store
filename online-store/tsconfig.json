@@ -101,4 +101,7 @@
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
   },
   "include": ["./src", "./images.d.ts"],
+  // "exclude": [
+  //   "./src/tests"
+  // ]
 }

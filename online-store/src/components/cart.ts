@@ -6,12 +6,6 @@ export class Cart {
   numberInCart: number;
   itemsInCart: string[];
 
-  // constructor(){
-  //   this.numberInCartEl = document.querySelector('.shopping-card__number') as Element;
-  //   this.numberInCart = Number(this.numberInCartEl?.innerHTML);
-  //   this.itemsInCart = [];
-  // }
-
   constructor(itemsInCart: string[]) {
     this.numberInCartEl = document.querySelector('.shopping-card__number') as Element;
     this.itemsInCart = itemsInCart;
@@ -22,17 +16,17 @@ export class Cart {
     this.numberInCartEl.innerHTML = String(this.numberInCart);
   }
 
-  increaseNumber(){
+  increaseNumber() {
     this.numberInCart += 1;
     this.numberInCartEl.innerHTML = String(this.numberInCart);
   }
 
-  decreaseNumber(){
+  decreaseNumber() {
     this.numberInCart -= 1;
     this.numberInCartEl.innerHTML = String(this.numberInCart);
   }
 
-  createPopup(){
+  createPopup() {
     const limitPopup = document.createElement('div');
     document.body.append(limitPopup);
     limitPopup.className = 'cart__popup';
