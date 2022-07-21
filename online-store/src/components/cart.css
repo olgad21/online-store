@@ -6,8 +6,8 @@
   top: 0;
   left: 0;
   z-index: 5;
-  opacity: 1; /*will change with js*/
-  visibility: visible; /*will change with js*/
+  opacity: 1; 
+  visibility: visible; 
   overflow-y: auto;
   overflow-x: hidden;
   transition: all 0.3s ease 0s;
@@ -15,7 +15,7 @@
 }
 
 .cart__popup--inactive {
-  opacity: 0; /*will change with js*/
+  opacity: 0; 
   visibility: hidden; 
 }
 
@@ -29,8 +29,3 @@
   line-height: 1.2;
   color: var(--bs-heading-color);
 }
-/* .cart__popup-message{
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-} */

@@ -1,6 +1,5 @@
 import { StoreItems } from './storeItems';
 import { ItemInterface } from './itemsData';
-//import { items } from './itemsData';
 
 export class App {
   start(data: ItemInterface[]) {
@@ -168,12 +167,12 @@ export class App {
     resetSetsBtn?.addEventListener('click', this.resetAllSettings);
   }
 
-  resetAllSettings(){
+  resetAllSettings() {
     window.localStorage.clear();
     window.location.reload();
   }
 
- drawSlider(sliders: HTMLInputElement[], minValue: HTMLElement, maxValue: HTMLElement, outputArr: number[]){
+  drawSlider(sliders: HTMLInputElement[], minValue: HTMLElement, maxValue: HTMLElement, outputArr: number[]) {
     sliders[0].value = outputArr[0].toString();
     sliders[1].value = outputArr[1].toString();
 

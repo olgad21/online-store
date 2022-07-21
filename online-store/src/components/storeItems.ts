@@ -19,13 +19,13 @@ export class StoreItems {
     sortType: string,
     cart: Cart,
   } = {
-      filters: JSON.parse(window.localStorage.getItem('checkboxFilters') as string) || [], 
+      filters: JSON.parse(window.localStorage.getItem('checkboxFilters') as string) || [],
       resultData: [],
       itemsContainer: document.getElementsByClassName('items-container')[0] as HTMLDivElement,
       searchRequest: '',
       priceRange: JSON.parse(window.localStorage.getItem('priceRange') as string) || [0, 1000],
       dateRange: JSON.parse(window.localStorage.getItem('yearsRange') as string) || [1990, 2022],
-      sortType: JSON.parse(window.localStorage.getItem('sortType') as string) || '', 
+      sortType: JSON.parse(window.localStorage.getItem('sortType') as string) || '',
       cart: new Cart(JSON.parse(window.localStorage.getItem('cart') as string) ?? []),
     }
 
@@ -177,7 +177,7 @@ export class StoreItems {
   }
 
   handleCart = (e: Event) => {
-    const target = e.target as Element; 
+    const target = e.target as Element;
 
     // if item is in the cart
     if (target.classList.contains('item')) {

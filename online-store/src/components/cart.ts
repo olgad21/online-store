@@ -1,5 +1,4 @@
 import './cart.css';
-// import { items } from './itemsData';
 export class Cart {
 
   numberInCartEl: Element;
@@ -22,7 +21,7 @@ export class Cart {
   }
 
   decreaseNumber() {
-    if(this.numberInCart > 0){
+    if (this.numberInCart > 0) {
       this.numberInCart -= 1;
       this.numberInCartEl.innerHTML = String(this.numberInCart);
     }

@@ -11,8 +11,8 @@ describe('Test StoreItems class', () => {
 
   test('createItems method should return array of objects', () => {
     expect(store.createItems(items)).toBeDefined();
-  
-    let result = store.createItems(items);
+
+    const result = store.createItems(items);
     expect(typeof result[0]).toBe('object');
   });
 
@@ -58,9 +58,9 @@ describe('Test StoreItems class', () => {
   test('remove method should clear items container', () => {
     store.elements.itemsContainer = document.createElement('div');
     const mockInnerContainer = document.createElement('div');
-    for (let i = 0; i <= 15; i++){
+    for (let i = 0; i <= 15; i++) {
       store.elements.itemsContainer.append(mockInnerContainer);
-    };
+    }
 
     store.remove();
 

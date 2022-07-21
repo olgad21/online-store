@@ -1,19 +1,19 @@
 import { App } from '../components/app';
-import { items } from '../components/itemsData';
 
 const app = new App();
+
 describe('Test app', () => {
   test('resetAllSettings method should clear all custom settings', () => {
     app.resetAllSettings();
     expect(localStorage.clear).toHaveBeenCalledTimes(1);
-    expect(localStorage.__STORE__).toEqual({}); 
+    expect(localStorage.__STORE__).toEqual({});
     expect(localStorage.length).toBe(0);
   });
 
   test('drawSlider method should work correctly', () => {
     const mockSliders: HTMLInputElement[] = [];
 
-    for (let i = 0; i < 2; i++){
+    for (let i = 0; i < 2; i++) {
       mockSliders.push(document.createElement('input'))
     }
 

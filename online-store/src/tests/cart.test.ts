@@ -5,7 +5,6 @@ jest.spyOn(document, 'querySelector').mockImplementation(() => {
   return mockParagraph;
 });
 
-
 describe('Test cart', () => {
   let mockCart: Cart;
 
@@ -20,7 +19,7 @@ describe('Test cart', () => {
   });
 
   test('amount in cart should be positive', () => {
-    for (let i = 0; i < (mockCart.itemsInCart.length + 3); i++){
+    for (let i = 0; i < (mockCart.itemsInCart.length + 3); i++) {
       mockCart.decreaseNumber();
     }
     expect(mockCart.numberInCart).toBeGreaterThanOrEqual(0);
