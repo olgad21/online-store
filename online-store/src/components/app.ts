@@ -61,7 +61,6 @@ export class App {
     function resetSearch() {
       filtersText.value = '';
       filteredResults.elements.searchRequest = '';
-      // filteredResults.elements.searchData = [];
       filteredResults.applyFilters(data);
     }
 
@@ -75,13 +74,6 @@ export class App {
     const sliderMinYear = document.querySelector<HTMLElement>('.filters__year-min-value') as HTMLElement;
     const sliderMaxYear = document.querySelector<HTMLElement>('.filters__year-max-value') as HTMLElement;
 
-    function drawSlider(sliders: HTMLInputElement[], minValue: HTMLElement, maxValue: HTMLElement, outputArr: number[]){
-      sliders[0].value = outputArr[0].toString();
-      sliders[1].value = outputArr[1].toString();
-
-      minValue.innerHTML = `${sliders[0].value}`;
-      maxValue.innerHTML = `${sliders[1].value}`;
-    }
 
     function handleSlider(sliders: HTMLInputElement[], minValue: HTMLElement, maxValue: HTMLElement, outputArr: number[], storeName: string) {
       sliders[0].addEventListener('input', () => {
@@ -117,13 +109,15 @@ export class App {
       filteredResults.applyFilters(data);
     }
 
-    drawSlider(priceSliders, sliderMinPrice, sliderMaxPrice, filteredResults.elements.priceRange);
-    drawSlider(yearSliders, sliderMinYear, sliderMaxYear, filteredResults.elements.dateRange);
+    this.drawSlider(priceSliders, sliderMinPrice, sliderMaxPrice, filteredResults.elements.priceRange);
+    this.drawSlider(yearSliders, sliderMinYear, sliderMaxYear, filteredResults.elements.dateRange);
 
     handleSlider(priceSliders, sliderMinPrice, sliderMaxPrice, filteredResults.elements.priceRange, 'priceRange');
     handleSlider(yearSliders, sliderMinYear, sliderMaxYear, filteredResults.elements.dateRange, 'yearsRange');
 
     //Add sorting
+
+    filteredResults.applyFilters(data);
 
     const select = document.querySelector<HTMLSelectElement>('select');
     select?.addEventListener('change', (e) => {
@@ -171,9 +165,19 @@ export class App {
 
     //RESET All SETTINGS
     const resetSetsBtn = document.querySelector('.reset-settings-btn');
-    resetSetsBtn?.addEventListener('click', () => {
-      window.localStorage.clear();
-      window.location.reload();
-    });
+    resetSetsBtn?.addEventListener('click', this.resetAllSettings);
+  }
+
+  resetAllSettings(){
+    window.localStorage.clear();
+    window.location.reload();
+  }
+
+ drawSlider(sliders: HTMLInputElement[], minValue: HTMLElement, maxValue: HTMLElement, outputArr: number[]){
+    sliders[0].value = outputArr[0].toString();
+    sliders[1].value = outputArr[1].toString();
+
+    minValue.innerHTML = `${sliders[0].value}`;
+    maxValue.innerHTML = `${sliders[1].value}`;
   }
 }

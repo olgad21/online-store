@@ -22,8 +22,10 @@ export class Cart {
   }
 
   decreaseNumber() {
-    this.numberInCart -= 1;
-    this.numberInCartEl.innerHTML = String(this.numberInCart);
+    if(this.numberInCart > 0){
+      this.numberInCart -= 1;
+      this.numberInCartEl.innerHTML = String(this.numberInCart);
+    }
   }
 
   createPopup() {
