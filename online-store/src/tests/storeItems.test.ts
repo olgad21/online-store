@@ -9,19 +9,19 @@ describe('Test StoreItems class', () => {
     jest.restoreAllMocks();
   });
 
-  test('createItems method should return array of HTMLDiv', () => {
+  test('createItems method should return array of objects', () => {
     expect(store.createItems(items)).toBeDefined();
   
     let result = store.createItems(items);
     expect(typeof result[0]).toBe('object');
   });
 
-  test('initializing should work correctly', () => {
+  test('initialize method should work correctly', () => {
     store.elements.resultData = [...items];
     expect(store.elements.resultData).toHaveLength(items.length);
   });
 
-  test('should add filters properly', () => {
+  test('addFilters method should work properly', () => {
     const input1 = document.createElement('input');
     input1.value = 'Bowls';
     input1.name = 'category';
@@ -43,7 +43,7 @@ describe('Test StoreItems class', () => {
     );
   });
 
-  test('should apply filters properly', () => {
+  test('applyFilters method should work properly', () => {
     jest.spyOn(store, 'remove').mockImplementation(() => null);
     jest.spyOn(store.elements.cart, 'setInitialCartValue').mockImplementation(() => null);
 
@@ -55,7 +55,7 @@ describe('Test StoreItems class', () => {
     expect(store.elements.resultData[0].size).toBe('Medium');
   });
 
-  test('should clear items container', () => {
+  test('remove method should clear items container', () => {
     store.elements.itemsContainer = document.createElement('div');
     const mockInnerContainer = document.createElement('div');
     for (let i = 0; i <= 15; i++){

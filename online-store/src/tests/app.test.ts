@@ -3,14 +3,14 @@ import { items } from '../components/itemsData';
 
 const app = new App();
 describe('Test app', () => {
-  test('should clear all custom settings', () => {
+  test('resetAllSettings method should clear all custom settings', () => {
     app.resetAllSettings();
     expect(localStorage.clear).toHaveBeenCalledTimes(1);
     expect(localStorage.__STORE__).toEqual({}); 
     expect(localStorage.length).toBe(0);
   });
 
-  test('should draw range slider', () => {
+  test('drawSlider method should work correctly', () => {
     const mockSliders: HTMLInputElement[] = [];
 
     for (let i = 0; i < 2; i++){
