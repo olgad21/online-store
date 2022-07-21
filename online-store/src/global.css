@@ -20,9 +20,9 @@ body {
   margin: 0 auto; 
 }
 
-/* header{
-  background-color: #D8CABA;
-} */
+label:hover{
+  cursor: pointer;
+}
 
 .header__container{
   display: flex;
@@ -46,6 +46,13 @@ body {
   position:absolute;
   left: 35%;
   top: 25%;
+}
+
+.form-range.search-form {
+  height: 37px;
+  border-color: lightgrey;
+  border-radius: 5px;
+  border-width: thin
 }
 
 select:hover,

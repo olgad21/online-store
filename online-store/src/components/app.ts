@@ -47,7 +47,7 @@ export class App {
     const resetBtn = document.querySelector('.reset-btn');
 
     filtersText.focus();
-    filtersText.addEventListener('change', () => {
+    filtersText.addEventListener('input', () => {
 
       const searchRequest = filtersText.value.toLowerCase();
       filteredResults.elements.searchRequest = searchRequest;
