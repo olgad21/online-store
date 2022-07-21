@@ -10,14 +10,14 @@ type Filter = {
 export class StoreItems {
 
   elements: {
-    filters: Filter[],
+    filters: Required<Filter[]>,
     resultData: ItemInterface[],
     itemsContainer: HTMLDivElement,
     searchRequest: string,
     priceRange: number[],
     dateRange: number[],
     sortType: string,
-    cart: Cart,
+    cart: Readonly<Cart>,
   } = {
       filters: JSON.parse(window.localStorage.getItem('checkboxFilters') as string) || [],
       resultData: [],

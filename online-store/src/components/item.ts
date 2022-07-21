@@ -13,7 +13,7 @@ class Item {
   price: number;
   size: string;
 
-  constructor(itemObj: ItemInterface) {
+  constructor(itemObj: Readonly<ItemInterface>) {
     this.name = itemObj.name;
     this.description = itemObj.description;
     this.color = itemObj.color;
