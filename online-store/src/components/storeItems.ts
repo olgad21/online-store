@@ -1,6 +1,7 @@
 import { Cart } from './cart';
 import Item from './item';
 import { ItemInterface } from './itemsData';
+import { noResultsError } from '../components/strings';
 
 type Filter = {
   type: string,
@@ -141,24 +142,14 @@ export class StoreItems {
     }
 
     res = res.filter(el => {
-      return el.price <= this.elements.priceRange[1] && el.price >= this.elements.priceRange[0];
-    });
-
-    res = res.filter(el => {
-      return el.date <= this.elements.dateRange[1] && el.date >= this.elements.dateRange[0];
-    });
-
-    res = res.filter(el => {
-      return categories.includes(el.category);
-    });
-
-    res = res.filter(el => {
-      return colors.includes(el.color);
-    });
-
-    res = res.filter(el => {
-      return sizes.includes(el.size);
-    });
+      return (
+        (el.price <= this.elements.priceRange[1] && el.price >= this.elements.priceRange[0]) &&
+        (el.date <= this.elements.dateRange[1] && el.date >= this.elements.dateRange[0]) &&
+        categories.includes(el.category) &&
+        colors.includes(el.color) &&
+        sizes.includes(el.size)
+      )
+    })
 
     if (!res.length) {
       this.showError();
@@ -166,13 +157,13 @@ export class StoreItems {
 
     this.elements.resultData = [...res];
 
-    this.initialize(this.elements.resultData);
+    this.initialize(res);
   }
 
   showError() {
     const errorMessage = document.createElement('p');
     errorMessage.classList.add('error-text');
-    errorMessage.innerHTML = 'Sorry, no results found';
+    errorMessage.innerHTML = noResultsError;
     this.elements.itemsContainer?.append(errorMessage);
   }
 

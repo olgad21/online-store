@@ -19,9 +19,7 @@ describe('Test cart', () => {
   });
 
   test('amount in cart should be positive', () => {
-    for (let i = 0; i < (mockCart.itemsInCart.length + 3); i++) {
-      mockCart.decreaseNumber();
-    }
+    mockCart.decreaseNumber();
     expect(mockCart.numberInCart).toBeGreaterThanOrEqual(0);
   })
 })

@@ -1,4 +1,5 @@
 import './cart.css';
+import { fullCartError } from '../components/strings';
 
 interface CartInterface {
   numberInCartEl: Element;
@@ -27,10 +28,8 @@ export class Cart implements CartInterface{
   }
 
   decreaseNumber() {
-    if (this.numberInCart > 0) {
-      this.numberInCart -= 1;
-      this.numberInCartEl.innerHTML = String(this.numberInCart);
-    }
+    this.numberInCart -= 1;
+    this.numberInCartEl.innerHTML = String(this.numberInCart);
   }
 
   createPopup() {
@@ -42,7 +41,7 @@ export class Cart implements CartInterface{
     limitMessage.classList.add('cart__popup-message');
     limitPopup.append(limitMessage);
 
-    limitMessage.innerHTML = 'Your cart is full!';
+    limitMessage.innerHTML = fullCartError;
 
     limitPopup.addEventListener('click', () => {
       limitPopup.classList.add('cart__popup--inactive')

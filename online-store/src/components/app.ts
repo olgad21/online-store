@@ -120,20 +120,15 @@ export class App {
   }
 
   handleSlider(sliders: HTMLInputElement[], minValue: HTMLElement, maxValue: HTMLElement, outputArr: number[], storeName: string, data: ItemInterface[]) {
-    sliders[0].addEventListener('input', () => {
-      if (+sliders[0].value > +sliders[1].value) {
-        sliders[1].value = sliders[0].value;
-      }
-    });
-
-    sliders[1].addEventListener('input', () => {
-      if (+sliders[1].value < +sliders[0].value) {
-        sliders[0].value = sliders[1].value;
-      }
-    });
 
     sliders.forEach((slider) => {
-      slider.addEventListener('change', () => {
+      slider.addEventListener('input', () => {
+        if (+sliders[0].value > +sliders[1].value) {
+          sliders[1].value = sliders[0].value;
+        } else if (+sliders[1].value < +sliders[0].value) {
+          sliders[0].value = sliders[1].value;
+        }
+
         minValue.innerHTML = sliders[0].value;
         maxValue.innerHTML = sliders[1].value;
         outputArr[0] = +sliders[0].value;
@@ -157,11 +152,7 @@ export class App {
     this.filteredResults.elements.filters = [];
 
     checkboxes.forEach(filter => {
-      if (filter.name === 'featured') {
-        filter.checked = false;
-      } else {
-        filter.checked = true;
-      }
+      filter.checked = !(filter.name === "featured");
       if (filter.checked) {
         this.filteredResults.addToFilters(filter);
       }
