@@ -1,9 +1,15 @@
 import './cart.css';
-export class Cart {
 
+interface CartInterface {
   numberInCartEl: Element;
   numberInCart: number;
   itemsInCart: string[];
+}
+export class Cart implements CartInterface{
+
+  numberInCartEl;
+  numberInCart;
+  itemsInCart;
 
   constructor(itemsInCart: string[]) {
     this.numberInCartEl = document.querySelector('.shopping-card__number') as Element;

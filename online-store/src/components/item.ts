@@ -1,17 +1,17 @@
 import { ItemInterface } from '../components/itemsData';
 import './item.css';
 
-class Item {
-  name: string;
-  description?: string;
-  color: string;
-  category: string;
-  featured: boolean;
-  inCart: boolean;
-  img: string;
-  date: number;
-  price: number;
-  size: string;
+class Item implements ItemInterface {
+  name;
+  description;
+  color;
+  category;
+  featured;
+  inCart;
+  img;
+  date;
+  price;
+  size;
 
   constructor(itemObj: Readonly<ItemInterface>) {
     this.name = itemObj.name;
@@ -76,7 +76,7 @@ class Item {
 
     const itemFeatured = document.createElement('p');
     itemFeatured.className = 'item__featured';
-    if (this.featured === true) {
+    if (this.featured) {
       itemFeatured.innerHTML = 'Featured: yes';
     } else {
       itemFeatured.innerHTML = 'Featured: no';

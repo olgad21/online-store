@@ -19,14 +19,14 @@ export class StoreItems {
     sortType: string,
     cart: Readonly<Cart>,
   } = {
-      filters: JSON.parse(window.localStorage.getItem('checkboxFilters') as string) || [],
+      filters: JSON.parse(localStorage.getItem('checkboxFilters') as string) || [],
       resultData: [],
       itemsContainer: document.getElementsByClassName('items-container')[0] as HTMLDivElement,
       searchRequest: '',
-      priceRange: JSON.parse(window.localStorage.getItem('priceRange') as string) || [0, 1000],
-      dateRange: JSON.parse(window.localStorage.getItem('yearsRange') as string) || [1990, 2022],
-      sortType: JSON.parse(window.localStorage.getItem('sortType') as string) || '',
-      cart: new Cart(JSON.parse(window.localStorage.getItem('cart') as string) ?? []),
+      priceRange: JSON.parse(localStorage.getItem('priceRange') as string) || [0, 1000],
+      dateRange: JSON.parse(localStorage.getItem('yearsRange') as string) || [1990, 2022],
+      sortType: JSON.parse(localStorage.getItem('sortType') as string) || '',
+      cart: new Cart(JSON.parse(localStorage.getItem('cart') as string) ?? []),
     }
 
   initialize(data: ItemInterface[]) {
@@ -160,7 +160,7 @@ export class StoreItems {
       return sizes.includes(el.size);
     });
 
-    if (res.length === 0) {
+    if (!res.length) {
       this.showError();
     }
 
@@ -186,7 +186,7 @@ export class StoreItems {
         const itemName = (target.childNodes[1] as HTMLElement).innerHTML;
         this.elements.cart.decreaseNumber();
         this.elements.cart.itemsInCart.splice(this.elements.cart.itemsInCart.indexOf(itemName), 1);
-        window.localStorage.setItem('cart', JSON.stringify(this.elements.cart.itemsInCart));
+        localStorage.setItem('cart', JSON.stringify(this.elements.cart.itemsInCart));
         (target.childNodes[7] as HTMLElement).innerHTML = 'Add to cart';
         return
       }
@@ -196,7 +196,7 @@ export class StoreItems {
         const itemName = ((target.parentNode as HTMLElement)?.childNodes[1] as HTMLElement).innerHTML;
         this.elements.cart.decreaseNumber();
         this.elements.cart.itemsInCart.splice(this.elements.cart.itemsInCart.indexOf(itemName), 1);
-        window.localStorage.setItem('cart', JSON.stringify(this.elements.cart.itemsInCart));
+        localStorage.setItem('cart', JSON.stringify(this.elements.cart.itemsInCart));
         ((target.parentNode as HTMLElement)?.childNodes[7] as HTMLElement).innerHTML = 'Add to cart';
         return
       }
@@ -215,7 +215,7 @@ export class StoreItems {
         this.elements.cart.increaseNumber();
         const itemName = (target.childNodes[1] as HTMLElement).innerHTML;
         this.elements.cart.itemsInCart.push(itemName);
-        window.localStorage.setItem('cart', JSON.stringify(this.elements.cart.itemsInCart));
+        localStorage.setItem('cart', JSON.stringify(this.elements.cart.itemsInCart));
         (target.childNodes[7] as HTMLElement).innerHTML = 'Added';
         return
       }
@@ -227,7 +227,7 @@ export class StoreItems {
         this.elements.cart.increaseNumber();
         const itemName = ((target.parentNode as HTMLDivElement)?.childNodes[1] as HTMLElement).innerHTML;
         this.elements.cart.itemsInCart.push(itemName);
-        window.localStorage.setItem('cart', JSON.stringify(this.elements.cart.itemsInCart));
+        localStorage.setItem('cart', JSON.stringify(this.elements.cart.itemsInCart));
         ((target.parentNode as HTMLDivElement)?.childNodes[7] as HTMLElement).innerHTML = 'Added';
         return
       }
