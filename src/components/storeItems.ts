@@ -1,7 +1,7 @@
 import { Cart } from './cart';
 import Item from './item';
 import { ItemInterface } from './itemsData';
-import { noResultsError } from '../components/strings';
+import { noResultsError } from './strings';
 
 type Filter = {
   type: string,

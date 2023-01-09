@@ -1,5 +1,5 @@
 import './cart.css';
-import { fullCartError } from '../components/strings';
+import { fullCartError } from './strings';
 
 interface CartInterface {
   numberInCartEl: Element;

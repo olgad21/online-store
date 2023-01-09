@@ -1,4 +1,4 @@
-import { ItemInterface } from '../components/itemsData';
+import { ItemInterface } from './itemsData';
 import './item.css';
 
 class Item implements ItemInterface {
